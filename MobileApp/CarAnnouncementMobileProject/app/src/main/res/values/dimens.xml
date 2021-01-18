@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <!-- Margin size app-->
+    <dimen name="margin_x_large">32sp</dimen>
+    <dimen name="margin_large">16sp</dimen>
+    <dimen name="margin_medium">8sp</dimen>
+    <dimen name="margin_small">4sp</dimen>
+    <dimen name="margin_x_small">2sp</dimen>
+
+  <!--  Padding size app-->
+    <dimen name="padding_x_large">32sp</dimen>
+    <dimen name="padding_large">16sp</dimen>
+    <dimen name="padding_medium">8sp</dimen>
+    <dimen name="padding_small">4sp</dimen>
+    <dimen name="padding_x_small">2sp</dimen>
+
+  <!-- Text size -->
+    <dimen name="text_x_large">40sp</dimen>
+    <dimen name="text_large">35sp</dimen>
+    <dimen name="text_medium">30sp</dimen>
+    <dimen name="text_small">25sp</dimen>
+    <dimen name="text_x_small">15sp</dimen>
+
+ <!-- Width sizes-->
+    <dimen name="width_x_large">200sp</dimen>
+    <dimen name="width_large">150sp</dimen>
+    <dimen name="width_medium">100sp</dimen>
+    <dimen name="width_small">50sp</dimen>
+    <dimen name="width_x_small">25sp</dimen>
+
+  <!-- Height sizes-->
+    <dimen name="height_x_large">200sp</dimen>
+    <dimen name="height_large">150sp</dimen>
+    <dimen name="height_medium">100sp</dimen>
+    <dimen name="height_small">50sp</dimen>
+    <dimen name="height_x_small">25sp</dimen>
+
+ <!--Drawable sizes-->
+    <dimen name="drawable_x_large">25sp</dimen>
+    <dimen name="drawable_large">20sp</dimen>
+    <dimen name="drawable_medium">15sp</dimen>
+    <dimen name="drawable_small">10sp</dimen>
+    <dimen name="drawable_x_small">5sp</dimen>
+
+</resources>

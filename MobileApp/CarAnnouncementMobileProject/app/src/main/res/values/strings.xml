@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CarAnnouncementMobileProject</string>
+    <string name="Loading">Gözləyin…</string>
+    <string name="Create_Account">Hesab Yarat</string>
+    <string name="Create_Account_Body">Yeni hesab yarat</string>
+    <string name="Name">Ad</string>
+    <string name="Email">Email ünvanı</string>
+    <string name="password">Şifrə</string>
+    <string name="Repeat_Password">Şifrəni təkrarla</string>
+    <string name="Have_Account">Artiq bir hesabın var ?</string>
+    <string name="Login_Transition">Daxil ol</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
