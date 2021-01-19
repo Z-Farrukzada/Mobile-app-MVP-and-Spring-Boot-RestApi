@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.CreateAccountFragment">
+    android:background="@color/white"
+    android:id="@+id/Create_Account_FrameLayout"
+    tools:context=".View.Register.CreateAccount.CreateAccountFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/Secondary"
+        android:background="@color/white"
         android:layout_height="match_parent"
-        tools:context=".View.RegisterActivity"
+        tools:context=".View.Register.RegisterActivity"
         tools:ignore="UselessParent">
 
         <ImageView
@@ -20,7 +22,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/margin_medium"
             android:src="@drawable/create_account_image"
-            android:layout_height="@dimen/height_x_large"/>
+            android:layout_height="@dimen/height_x_large"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/Create_Account_Header"
@@ -147,7 +150,8 @@
             android:text="@string/Create_Account"
             android:fontFamily="@font/regular"
             android:textSize="@dimen/text_x_small"
-            android:textColor="@color/Secondary" />
+            android:textStyle="bold"
+            android:textColor="@color/white" />
 
 
         <LinearLayout

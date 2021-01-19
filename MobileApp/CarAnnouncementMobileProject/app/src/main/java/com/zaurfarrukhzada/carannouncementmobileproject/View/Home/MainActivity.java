@@ -1,4 +1,4 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.View;
+package com.zaurfarrukhzada.carannouncementmobileproject.View.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -9,6 +9,13 @@
     <string name="Repeat_Password">Şifrəni təkrarla</string>
     <string name="Have_Account">Artiq bir hesabın var ?</string>
     <string name="Login_Transition">Daxil ol</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Welcome_back">Xoş gəlmisiniz</string>
+    <string name="Sign_in_to_continue">Davam etmək ücün işarə.</string>
+    <string name="Forgot_Password">Şifrəni unutmusan ? </string>
+    <string name="Login">Daxil ol</string>
+    <string name="Login_Have_Account">Bir hesabın yoxdur ?</string>
+    <string name="Login_Transition_Register">Yeni Hesab yarat</string>
+    <string name="Reset_Password">Şifrəni dəyişdir</string>
+    <string name="Send">Göndər</string>
+    <string name="Go_Back">Geri dönmək</string>
 </resources>
