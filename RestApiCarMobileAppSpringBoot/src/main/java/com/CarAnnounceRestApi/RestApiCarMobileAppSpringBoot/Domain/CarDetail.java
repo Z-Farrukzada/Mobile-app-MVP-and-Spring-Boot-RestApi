@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class City {
-
+public class CarDetail {
     private int id;
-    private String Name;
-
+    private boolean hatch;
+    private  boolean ABS;
+    private  boolean airCondition;
 }

@@ -7,9 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class City {
-
-    private int id;
-    private String Name;
-
+public class CarColors{
+    private  int id;
+    private String name;
 }

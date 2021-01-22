@@ -1,5 +1,4 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,9 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class City {
-
+public class Exchanges {
     private int id;
-    private String Name;
-
+    private  String exchangeName;
 }
