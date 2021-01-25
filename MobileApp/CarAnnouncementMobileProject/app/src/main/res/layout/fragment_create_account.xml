@@ -7,6 +7,10 @@
     android:id="@+id/Create_Account_FrameLayout"
     tools:context=".View.Register.CreateAccount.CreateAccountFragment">
 
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/white"
@@ -117,11 +121,11 @@
             tools:targetApi="m" />
 
         <EditText
-            android:id="@+id/Create_Account_RepeatPassword_Input"
+            android:id="@+id/Create_Account_Phone_Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Create_Account_Password_Input"
-            android:hint="@string/Repeat_Password"
+            android:hint="@string/Phone_Number"
             android:inputType="textPassword"
             android:drawableStart="@drawable/password_icon_size"
             android:drawableTint="@color/PrimarySecondary"
@@ -137,21 +141,38 @@
             android:autofillHints="text"
             tools:targetApi="m" />
 
+        <Spinner
+            android:id="@+id/Create_Account_Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_below="@id/Create_Account_Phone_Input"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:overlapAnchor="false"
+            android:spinnerMode="dropdown"
+            android:visibility="visible"
+            android:backgroundTint="@color/PrimaryDark"
+            android:prompt="@string/Select_country"
+            android:background="@drawable/shadow_drawable"
+            />
+
         <Button
             android:id="@+id/Create_Account_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Create_Account_RepeatPassword_Input"
+            android:layout_below="@id/Create_Account_Spinner"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginHorizontal="@dimen/margin_x_large"
             android:layout_marginTop="@dimen/margin_large"
+            android:enabled="false"
+            android:fontFamily="@font/regular"
             android:padding="@dimen/padding_large"
             android:text="@string/Create_Account"
-            android:fontFamily="@font/regular"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_x_small"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -191,5 +212,6 @@
 
 
     </RelativeLayout>
+  </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

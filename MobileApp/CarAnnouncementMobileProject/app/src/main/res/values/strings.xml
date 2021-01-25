@@ -6,7 +6,7 @@
     <string name="Name">Ad</string>
     <string name="Email">Email ünvanı</string>
     <string name="password">Şifrə</string>
-    <string name="Repeat_Password">Şifrəni təkrarla</string>
+    <string name="Phone_Number">Mobil nömrənizi daxil edin</string>
     <string name="Have_Account">Artiq bir hesabın var ?</string>
     <string name="Login_Transition">Daxil ol</string>
     <string name="Welcome_back">Xoş gəlmisiniz</string>
@@ -18,4 +18,5 @@
     <string name="Reset_Password">Şifrəni dəyişdir</string>
     <string name="Send">Göndər</string>
     <string name="Go_Back">Geri dönmək</string>
+    <string name="Select_country">Yaşadığınız şəhəri seçin.</string>
 </resources>
