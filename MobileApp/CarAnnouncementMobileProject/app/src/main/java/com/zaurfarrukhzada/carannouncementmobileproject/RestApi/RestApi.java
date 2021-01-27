@@ -1,5 +1,6 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.RestApi;
 
+import com.google.gson.JsonObject;
 import com.zaurfarrukhzada.carannouncementmobileproject.Model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.Model.Message;
 import com.zaurfarrukhzada.carannouncementmobileproject.Model.User;
@@ -21,12 +22,16 @@ public interface RestApi {
     @GET("cities/all")
     Call<List<City>> getAllCity(); /*Call All Cities*/
 
-
     @POST("user/register")
     Call<Message> registerUser(@Body User user); /*Create New User*/
 
-
     @GET("cities/name/{cityName}")
-    Call<Long> withNameFindId(@Path("cityName") String cityName);//City name find Id;
+    Call<Long> withNameFindId(@Path("cityName") String cityName); //City name find Id;
+
+    @POST("user/login")
+    Call<Message> loginUser(@Body JsonObject jsonObject); //Login user
+
+    @POST("user/changePassword")
+    Call<Message> changePassword(@Body JsonObject jsonObject);  //ChangeUserPasswordWithEmail
 
 }

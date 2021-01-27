@@ -3,75 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/blueDark"
     android:id="@+id/Create_Account_FrameLayout"
     tools:context=".View.Register.CreateAccount.CreateAccountFragment">
 
-  <androidx.core.widget.NestedScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
+
 
     <RelativeLayout
+        android:background="@drawable/layout_radius"
+        android:layout_margin="@dimen/margin_large"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_x_large"
         tools:context=".View.Register.RegisterActivity"
         tools:ignore="UselessParent">
 
-        <ImageView
-            android:id="@+id/Create_Account_Image"
-            android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:src="@drawable/create_account_image"
-            android:layout_height="@dimen/height_x_large"
-            tools:ignore="ContentDescription" />
-
         <TextView
             android:id="@+id/Create_Account_Header"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/Create_Account_Image"
-            android:layout_marginTop="@dimen/margin_x_large"
             android:text="@string/Create_Account"
-            android:textSize="@dimen/text_medium"
-            android:textColor="@color/PrimaryDark"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:fontFamily="@font/regular"/>
+            android:textColor="@color/blueDark"
+            android:fontFamily="@font/nerk"
+            android:layout_margin="@dimen/text_medium"
+            android:textSize="@dimen/text_large"
+            />
 
-        <TextView
-            android:id="@+id/Create_Account_Body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Create_Account_Body"
-            android:layout_below="@id/Create_Account_Header"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:textAlignment="center"
-            android:fontFamily="@font/regular"
-            android:textColor="@color/Primary"
-            android:textSize="@dimen/text_x_small" />
 
         <EditText
             android:id="@+id/Create_Account_Name_Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Create_Account_Body"
             android:hint="@string/Name"
+            android:fontFamily="@font/nerk"
             android:inputType="text"
+            android:background="@drawable/shadow_drawable"
             android:drawableStart="@drawable/user"
             android:drawableTint="@color/PrimarySecondary"
-            android:layout_margin="@dimen/margin_medium"
-            android:textColorHint="@color/PrimarySecondary"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:layout_marginVertical="@dimen/margin_x_small"
+            android:layout_below="@id/Create_Account_Header"
+            android:textColorHint="@color/blueDark"
             android:drawablePadding="@dimen/drawable_small"
             android:padding="@dimen/padding_large"
             android:textColor="@color/PrimaryDark"
-            android:background="@drawable/shadow_drawable"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             tools:ignore="TextFields"
@@ -85,14 +61,16 @@
             android:layout_below="@id/Create_Account_Name_Input"
             android:hint="@string/Email"
             android:inputType="text"
+            android:fontFamily="@font/nerk"
+            android:background="@drawable/shadow_drawable"
+            android:layout_marginVertical="@dimen/margin_medium"
             android:drawableStart="@drawable/email_icon_size"
             android:drawableTint="@color/PrimarySecondary"
-            android:layout_margin="@dimen/margin_medium"
-            android:textColorHint="@color/PrimarySecondary"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:textColorHint="@color/blueDark"
             android:drawablePadding="@dimen/drawable_small"
             android:padding="@dimen/padding_large"
             android:textColor="@color/PrimaryDark"
-            android:background="@drawable/shadow_drawable"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             tools:ignore="TextFields"
@@ -105,15 +83,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Create_Account_Email_Input"
             android:hint="@string/password"
+            android:fontFamily="@font/nerk"
+            android:background="@drawable/shadow_drawable"
             android:inputType="textPassword"
+            android:layout_marginVertical="@dimen/margin_medium"
             android:drawableStart="@drawable/password_icon_size"
             android:drawableTint="@color/PrimarySecondary"
-            android:layout_margin="@dimen/margin_medium"
-            android:textColorHint="@color/PrimarySecondary"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:textColorHint="@color/blueDark"
             android:drawablePadding="@dimen/drawable_small"
             android:padding="@dimen/padding_large"
             android:textColor="@color/PrimaryDark"
-            android:background="@drawable/shadow_drawable"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             tools:ignore="TextFields"
@@ -126,35 +106,53 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Create_Account_Password_Input"
             android:hint="@string/Phone_Number"
-            android:inputType="textPassword"
-            android:drawableStart="@drawable/password_icon_size"
+            android:inputType="number"
+            android:fontFamily="@font/nerk"
+            android:background="@drawable/shadow_drawable"
+            android:layout_marginVertical="@dimen/margin_medium"
+            android:drawableStart="@drawable/smartphone_icon_size"
             android:drawableTint="@color/PrimarySecondary"
-            android:layout_margin="@dimen/margin_medium"
-            android:textColorHint="@color/PrimarySecondary"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:textColorHint="@color/blueDark"
             android:drawablePadding="@dimen/drawable_small"
             android:padding="@dimen/padding_large"
             android:textColor="@color/PrimaryDark"
-            android:background="@drawable/shadow_drawable"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             tools:ignore="TextFields"
-            android:autofillHints="text"
+            android:autofillHints="number"
             tools:targetApi="m" />
+
+
+        <TextView
+            android:id="@+id/Create_Account_Select_Country_Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Select_country_label"
+            android:layout_below="@+id/Create_Account_Phone_Input"
+            android:layout_marginHorizontal="@dimen/margin_x_large"
+            android:textColor="@color/blueDark"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/padding_small"
+            />
 
         <Spinner
             android:id="@+id/Create_Account_Spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_medium"
-            android:layout_below="@id/Create_Account_Phone_Input"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:layout_below="@id/Create_Account_Select_Country_Label"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:overlapAnchor="false"
             android:spinnerMode="dropdown"
             android:visibility="visible"
-            android:backgroundTint="@color/PrimaryDark"
+            android:popupElevation="@dimen/margin_large"
+            android:dropDownWidth="match_parent"
+            android:dropDownSelector="@color/Primary"
             android:prompt="@string/Select_country"
-            android:background="@drawable/shadow_drawable"
+            android:background="@drawable/style_spinner"
             />
 
         <Button
@@ -168,7 +166,9 @@
             android:layout_marginTop="@dimen/margin_large"
             android:enabled="false"
             android:fontFamily="@font/regular"
-            android:padding="@dimen/padding_large"
+            android:padding="@dimen/padding_small"
+            android:background="@drawable/layout_radius"
+            android:backgroundTint="@color/blueDark"
             android:text="@string/Create_Account"
             android:textColor="@color/white"
             android:textSize="@dimen/text_x_small"
@@ -181,7 +181,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:orientation="horizontal"
-            android:layout_marginVertical="@dimen/margin_small"
+            android:layout_marginVertical="@dimen/margin_x_large"
             android:gravity="center"
             android:layout_height="wrap_content">
 
@@ -199,7 +199,7 @@
                 android:id="@+id/Create_Account_Transition_Login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/PrimaryDark"
+                android:textColor="@color/blueDark"
                 android:textSize="@dimen/text_x_small"
                 android:layout_marginHorizontal="@dimen/margin_medium"
                 android:textStyle="bold"
@@ -212,6 +212,6 @@
 
 
     </RelativeLayout>
-  </androidx.core.widget.NestedScrollView>
+
 
 </FrameLayout>

@@ -17,18 +17,15 @@ public class BrandController {
     @Autowired
     BrandServices brandServices;
 
+
     @GetMapping
     public ResponseEntity<List<CarBrand>> allListBrand(){
-           List<CarBrand> listBrand = brandServices.getAll();
-           return  new ResponseEntity<>(listBrand, HttpStatus.OK);
+           return  new ResponseEntity<>(brandServices.getAll(),HttpStatus.OK);
     }
-
     @GetMapping("/{brandId}")
     public ResponseEntity<CarBrand> findByIdBrand(@PathVariable("brandId") int brandId){
-        CarBrand carBrand = brandServices.findById(brandId);
-         return  new ResponseEntity<>(carBrand,HttpStatus.OK);
+         return  new ResponseEntity<>(brandServices.findById(brandId),HttpStatus.OK);
     }
-
     @PostMapping("/createBrand")
     public ResponseEntity<Map<String,String>> addBrand(@RequestBody CarBrand carBrand){
            brandServices.add(carBrand);

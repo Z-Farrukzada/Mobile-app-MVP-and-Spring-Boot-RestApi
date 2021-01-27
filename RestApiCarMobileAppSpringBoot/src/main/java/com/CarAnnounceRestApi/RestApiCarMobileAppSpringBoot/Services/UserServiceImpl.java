@@ -37,4 +37,9 @@ public class UserServiceImpl implements  UserService{
     public User validate(String email, String password) throws CustomAuthException {
         return userRepository.findEmailAndPassword(email,password);
     }
+
+    @Override
+    public String findEmailChangePassword(String email,String password) {
+        return userRepository.findEmailAndChangePassword(email,password);
+    }
 }

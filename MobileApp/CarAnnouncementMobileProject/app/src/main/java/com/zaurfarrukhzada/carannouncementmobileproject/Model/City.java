@@ -3,8 +3,15 @@ package com.zaurfarrukhzada.carannouncementmobileproject.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class City {
 
     @SerializedName("id")
@@ -14,24 +21,5 @@ public class City {
     @Expose
     private String Name;
 
-    public City(int id, String name) {
-        this.id = id;
-        Name = name;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
 }

@@ -8,5 +8,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Exchanges {
     private int id;
-    private  String exchangeName;
+    private  String name;
 }

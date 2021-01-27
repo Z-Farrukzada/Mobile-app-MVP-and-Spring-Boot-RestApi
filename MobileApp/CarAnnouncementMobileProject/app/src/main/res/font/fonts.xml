@@ -7,4 +7,9 @@
         android:font="@font/regular"
         tools:ignore="UnusedAttribute" />
 
+    <font
+        android:fontStyle="normal"
+        android:font="@font/nerk"
+        tools:targetApi="o" />
+
 </font-family>

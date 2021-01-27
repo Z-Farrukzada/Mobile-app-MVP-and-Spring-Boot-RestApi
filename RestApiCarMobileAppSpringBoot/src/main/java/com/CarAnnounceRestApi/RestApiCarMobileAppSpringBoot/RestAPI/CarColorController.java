@@ -18,15 +18,14 @@ public class CarColorController {
     @Autowired
     CarColorsService carColorsService;
 
+
     @GetMapping
     public ResponseEntity<List<CarColors>> allListColors(){
-         List<CarColors> carColors = carColorsService.getAll();
-         return  new ResponseEntity<>(carColors, HttpStatus.OK);
+         return  new ResponseEntity<>(carColorsService.getAll(),HttpStatus.OK);
     }
     @GetMapping("/{colorId}")
     public ResponseEntity<CarColors> findByIdColor(@PathVariable("colorId") int colorId){
-        CarColors carColors = carColorsService.findById(colorId);
-        return  new ResponseEntity<>(carColors,HttpStatus.OK);
+        return  new ResponseEntity<>(carColorsService.findById(colorId),HttpStatus.OK);
     }
     @PostMapping("/createdColor")
     public ResponseEntity<Map<String,String>> createNewColor(@RequestBody CarColors carColors){

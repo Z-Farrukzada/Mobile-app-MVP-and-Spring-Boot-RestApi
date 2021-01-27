@@ -5,7 +5,7 @@ import java.text.DateFormat;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CarAnnouncement {
+public  class CarAnnouncement {
     private  int id;
     private  int walk;
     private  int price;

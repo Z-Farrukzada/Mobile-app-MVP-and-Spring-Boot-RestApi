@@ -18,15 +18,14 @@ public class CarBanController {
     @Autowired
     CarBanService carBanService;
 
+
     @GetMapping
     public ResponseEntity<List<CarBan>> allListCarBans(){
-        List<CarBan> carBans = carBanService.getAll();
-        return new ResponseEntity<>(carBans, HttpStatus.OK);
+        return new ResponseEntity<>(carBanService.getAll(),HttpStatus.OK);
     }
     @GetMapping("/{banId}")
     public ResponseEntity<CarBan> findByIdCarBan(@PathVariable("banId") int id){
-        CarBan carBan = carBanService.findById(id);
-        return  new ResponseEntity<>(carBan,HttpStatus.OK);
+        return  new ResponseEntity<>( carBanService.findById(id),HttpStatus.OK);
     }
     @PostMapping("/createdBan")
     public ResponseEntity<Map<String,String>> createNewBan(@RequestBody CarBan carBan){

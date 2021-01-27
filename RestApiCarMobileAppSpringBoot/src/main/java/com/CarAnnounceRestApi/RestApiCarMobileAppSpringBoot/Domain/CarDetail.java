@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CarDetail {
     private int id;
-    private boolean hatch;
+    private  boolean hatch;
     private  boolean ABS;
-    private  boolean airCondition;
+    private  boolean aircondition;
 }

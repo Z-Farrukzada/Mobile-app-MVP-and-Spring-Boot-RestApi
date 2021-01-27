@@ -1,8 +1,10 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Locale;
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     private int Id;
@@ -13,7 +15,7 @@ public class User {
     private int city_id;
 
 
-    public int getId() {
+    public int getId(int userId) {
         return Id;
     }
 
@@ -60,4 +62,6 @@ public class User {
     public void setCity_id(int city_id) {
         this.city_id = city_id;
     }
+
+
 }

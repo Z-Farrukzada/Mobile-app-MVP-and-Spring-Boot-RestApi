@@ -19,4 +19,9 @@
     <string name="Send">Göndər</string>
     <string name="Go_Back">Geri dönmək</string>
     <string name="Select_country">Yaşadığınız şəhəri seçin.</string>
+    <string name="Select_country_label">Zəhmət olmasa yaşadığınız şəhəri seçin</string>
+    <string name="Add_New_Password">Yeni şifrəni daxil edin.</string>
+    <string name="Button_Yes">Bəli</string>
+    <string name="Button_No">Xeyr</string>
+    <string name="Please_Write_New_Password">Zəhmət olmasa şifrə daxil edin.</string>
 </resources>
