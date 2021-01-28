@@ -17,9 +17,11 @@
         <activity android:name=".View.Register.RegisterActivity"
             android:theme="@style/FullScreen"/>
         <activity android:name=".View.Home.MainActivity"
-            android:theme="@style/FullScreen"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".View.Splash.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -24,4 +24,6 @@
     <string name="Button_Yes">Bəli</string>
     <string name="Button_No">Xeyr</string>
     <string name="Please_Write_New_Password">Zəhmət olmasa şifrə daxil edin.</string>
+    <string name="Settings">Parametrlər</string>
+    <string name="LogOut">Hesabdan çıx</string>
 </resources>
