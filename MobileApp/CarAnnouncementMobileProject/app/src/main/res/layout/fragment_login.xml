@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/Login_Frame_Layout"
     android:background="@color/blueDark"
-    tools:context=".View.Register.Login.LoginFragment">
+    tools:context=".view.Fragment.Login.LoginFragment">
 
     <RelativeLayout
         android:background="@drawable/layout_radius"

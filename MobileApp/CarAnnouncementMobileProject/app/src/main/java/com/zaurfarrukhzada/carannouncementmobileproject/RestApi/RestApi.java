@@ -1,21 +1,17 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.RestApi;
+package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 
 import com.google.gson.JsonObject;
-import com.zaurfarrukhzada.carannouncementmobileproject.Model.City;
-import com.zaurfarrukhzada.carannouncementmobileproject.Model.Message;
-import com.zaurfarrukhzada.carannouncementmobileproject.Model.User;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface RestApi {
 

@@ -1,7 +1,12 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.Model;
+package com.zaurfarrukhzada.carannouncementmobileproject.model;
+
+import android.text.TextUtils;
+import android.util.Patterns;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.regex.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +40,12 @@ public class User {
     @Expose
     private long city_id;
 
+
+    public boolean isValid(){
+
+        return false;
+
+
+    }
 
 }

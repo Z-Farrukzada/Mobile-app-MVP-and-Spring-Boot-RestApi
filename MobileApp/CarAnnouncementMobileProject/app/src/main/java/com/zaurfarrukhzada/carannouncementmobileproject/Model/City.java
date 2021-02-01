@@ -1,4 +1,4 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.Model;
+package com.zaurfarrukhzada.carannouncementmobileproject.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

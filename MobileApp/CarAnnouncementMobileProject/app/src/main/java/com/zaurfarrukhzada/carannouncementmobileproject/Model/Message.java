@@ -1,4 +1,4 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.Model;
+package com.zaurfarrukhzada.carannouncementmobileproject.model;
 
 
 import lombok.Getter;

@@ -26,4 +26,5 @@
     <string name="Please_Write_New_Password">Zəhmət olmasa şifrə daxil edin.</string>
     <string name="Settings">Parametrlər</string>
     <string name="LogOut">Hesabdan çıx</string>
+    <string name="Check_input"></string>
 </resources>

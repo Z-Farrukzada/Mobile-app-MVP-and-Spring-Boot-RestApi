@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginfragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/loginfragment"
+        android:name="com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.Login.LoginFragment"
+        android:label="loginBlankFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginfragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_loginfragment_to_forgotPasswordFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.Create.CreateAccountFragment"
+        android:label="createAccountBlankFragment"
+        tools:layout="@layout/fragment_create_account" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_loginfragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:destination="@id/loginfragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.ForgotPassword.ForgotPasswordFragment"
+        android:label="forgotBlankFragment"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_loginfragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:destination="@id/loginfragment" />
+    </fragment>
+
+</navigation>

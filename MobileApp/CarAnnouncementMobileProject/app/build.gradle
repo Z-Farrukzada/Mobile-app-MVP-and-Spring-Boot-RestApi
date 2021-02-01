@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.zaurfarrukhzada.carannouncementmobileproject"
@@ -29,9 +29,10 @@ android {
 }
 def lottieVersion='3.6.0'
 def retrofitVersion = '2.3.0'
-def rxJavaVersion = '2.1.1'
 def okHttpVersion = '4.9.0'
 def lombokVersion = '1.18.16'
+def nav_version = "2.3.3"
+def butterKnifeVersion = '10.2.3'
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -50,13 +51,23 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
 
     //noinspection AnnotationProcessorOnCompilePath
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
+    // Java language implementation
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+    // Testing Navigation
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+    // JetPack Compose Integration
+    implementation "androidx.navigation:navigation-compose:1.0.0-alpha06"
 
+    //ButterKnife
+    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
 }

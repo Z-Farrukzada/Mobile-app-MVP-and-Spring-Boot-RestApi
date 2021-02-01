@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/blueDark"
     android:id="@+id/Create_Account_FrameLayout"
-    tools:context=".View.Register.CreateAccount.CreateAccountFragment">
+    tools:context=".view.Fragment.Create.CreateAccountFragment">
 
 
 
@@ -16,7 +16,7 @@
         android:backgroundTint="@color/white"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/margin_x_large"
-        tools:context=".View.Register.RegisterActivity"
+        tools:context=".view.Activity.Register.RegisterActivity"
         tools:ignore="UselessParent">
 
         <TextView

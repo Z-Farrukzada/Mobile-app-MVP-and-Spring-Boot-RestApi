@@ -1,9 +1,9 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.RestApi;
+package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 
 import com.google.gson.JsonObject;
-import com.zaurfarrukhzada.carannouncementmobileproject.Model.City;
-import com.zaurfarrukhzada.carannouncementmobileproject.Model.Message;
-import com.zaurfarrukhzada.carannouncementmobileproject.Model.User;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
 
 import java.util.List;
 

@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarAnnouncementMobileProject"
         tools:targetApi="m">
-        <activity android:name=".View.Register.RegisterActivity"
+        <activity android:name=".view.Activity.Register.RegisterActivity"
             android:theme="@style/FullScreen"/>
-        <activity android:name=".View.Home.MainActivity"
+        <activity android:name=".view.Activity.Home.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".View.Splash.SplashActivity"
+            android:name=".view.Activity.Splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreen">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.RestApi;
+package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 
 public class BaseManager {
 

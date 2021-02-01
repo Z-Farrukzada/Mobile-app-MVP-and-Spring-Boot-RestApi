@@ -1,4 +1,4 @@
-package com.zaurfarrukhzada.carannouncementmobileproject.Custom;
+package com.zaurfarrukhzada.carannouncementmobileproject.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
