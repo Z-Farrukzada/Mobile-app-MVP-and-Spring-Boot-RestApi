@@ -40,7 +40,7 @@ public class CreateAccountPresenter implements ICreateAccountContract.Presenter 
     }
 
     @Override
-    public void onSuccess(int message) {
+    public void onSuccess(String message) {
          this.mView.hideLoadingDialog();
          this.mView.success(message);
     }

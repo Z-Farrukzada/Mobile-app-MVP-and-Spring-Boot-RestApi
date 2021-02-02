@@ -16,7 +16,6 @@ public interface ICreateAccountContract {
 
     interface View{
 
-
         void success(String message);
 
         void failed(int message);
@@ -31,7 +30,7 @@ public interface ICreateAccountContract {
 
         void selectCountries(List<Integer> cityId);
 
-        void CustomToast(int message,int image,boolean check,String otherMessage);
+        void CustomToast(int message,int image);
 
     }
 

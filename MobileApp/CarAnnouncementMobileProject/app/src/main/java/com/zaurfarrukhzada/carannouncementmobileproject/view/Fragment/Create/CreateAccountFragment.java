@@ -1,13 +1,16 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.Create;
 
-import android.annotation.SuppressLint;
+
+import android.app.blob.BlobStoreManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -102,15 +104,13 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountCon
 
     @Override
     public void success(String message) {
-        CustomToast(0,R.drawable.happy,true,message);
-        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-        startActivity(mainIntent);
-        getActivity().finish();
+        Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
+        IntentCreateAccount();
     }
 
     @Override
     public void failed(int message) {
-        CustomToast(message,R.drawable.angry,false,"");
+        CustomToast(message,R.drawable.angry);
     }
 
     //SHOW DIALOG
@@ -133,11 +133,17 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountCon
 
     //CUSTOM TOAST
     @Override
-    public void CustomToast(int message,int image,boolean check,String otherMessage) {
+    public  void CustomToast(int message,int image) {
         View view = CustomToast.showMessage(requireActivity(),R.layout.custom_toast_success);
         view.findViewById(R.id.custom_toast_root).setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(),R.color.blueDark));
-        CustomToast.setToastTextAndImage(view,R.id.success_toast_message_text,check,message,otherMessage,R.id.custom_toast_image,image);
+        CustomToast.setToastTextAndImage(view,R.id.success_toast_message_text,message,R.id.custom_toast_image,image);
         CustomToast.toastProperty(requireActivity(), Gravity.AXIS_CLIP,0,600,1000,view);
+    }
+    //SHARED INTENT
+    public void IntentCreateAccount(){
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(mainIntent);
+        getActivity().finish();
     }
 
 }

@@ -34,4 +34,7 @@
     <string name="Email_Row_invalid">Email Sətirini boş saxlamayın </string>
     <string name="Password_invalid">Şifrə sətrini boş saxlamayın.</string>
     <string name="Password_length_invalid">Şifrənin uzunluğu minimum 6 simvol olmalıdır.</string>
+    <string name="CheckInputs">Zehmet olmasa duzgun daxil edin</string>
+    <string name="Response_Data">Şifrə və ya Email səhvdir...</string>
+    <string name="Response_Db">Əlavə olunmadi...</string>
 </resources>

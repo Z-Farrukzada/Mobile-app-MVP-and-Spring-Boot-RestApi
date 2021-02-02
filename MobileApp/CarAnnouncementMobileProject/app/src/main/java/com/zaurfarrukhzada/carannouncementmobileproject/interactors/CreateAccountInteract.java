@@ -119,7 +119,7 @@ public class CreateAccountInteract {
                 return;
             }
         } else {
-            this.presenter.onSuccess("Qeydiyyatdan kecmisiniz.");
+            Toast.makeText(activity, ":)))))", Toast.LENGTH_SHORT).show();
         }
     }
 
