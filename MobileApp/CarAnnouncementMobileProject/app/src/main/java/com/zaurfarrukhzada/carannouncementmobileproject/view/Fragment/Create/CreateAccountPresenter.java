@@ -3,6 +3,7 @@ package com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.Create;
 import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,15 +13,20 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.zaurfarrukhzada.carannouncementmobileproject.R;
 import com.zaurfarrukhzada.carannouncementmobileproject.interactors.CreateAccountInteract;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
+
+import java.util.List;
 
 import butterknife.BindView;
 
 public class CreateAccountPresenter implements ICreateAccountContract.Presenter {
 
     ICreateAccountContract.View mView;
+    CreateAccountInteract interact;
 
     public CreateAccountPresenter(ICreateAccountContract.View mView) {
         this.mView = mView;
+        this.interact = new CreateAccountInteract(this);
     }
 
     @Override
@@ -29,18 +35,32 @@ public class CreateAccountPresenter implements ICreateAccountContract.Presenter 
     }
 
     @Override
-    public void onViewCreatedFrag() {
-       this.mView.createAccount();
-    }
-
-    @Override
-    public void createNewUser(EditText username, EditText email, EditText phone, EditText password, Spinner countries, Button btn, Activity activity) {
-        CreateAccountInteract.selectCountries(activity,countries,username,email,password,phone,btn);
-    }
-
-    @Override
     public void getAllCityList(Activity activity,Spinner spinner) {
-        CreateAccountInteract.callRestApiCities(activity,spinner);
+        interact.callRestApiCities(activity,spinner);
     }
+
+    @Override
+    public void onSuccess(int message) {
+         this.mView.hideLoadingDialog();
+         this.mView.success(message);
+    }
+
+    @Override
+    public void login(User user, Activity activity) {
+          this.mView.showLoadingDialog();
+          this.interact.createNewAccount(user,activity);
+    }
+
+    @Override
+    public void onFailed(int message) {
+        this.mView.hideLoadingDialog();
+        this.mView.failed(message);
+    }
+
+    @Override
+    public void allCityId(List<Integer> cityId) {
+         this.mView.selectCountries(cityId);
+    }
+
 
 }

@@ -1,24 +1,34 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.Create;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.zaurfarrukhzada.carannouncementmobileproject.R;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
+import com.zaurfarrukhzada.carannouncementmobileproject.utils.CustomToast;
+import com.zaurfarrukhzada.carannouncementmobileproject.utils.LoadingDialogCustom;
+import com.zaurfarrukhzada.carannouncementmobileproject.view.Activity.Home.MainActivity;
 
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -36,8 +46,6 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountCon
     TextView createAccountTransitionLogin;
     @BindView(R.id.Create_Account_Spinner)
     Spinner countries;
-    @BindView(R.id.Create_Account_Button)
-    Button createAccountBtn;
     @BindView(R.id.Create_Account_Name_Input)
     EditText name;
     @BindView(R.id.Create_Account_Email_Input)
@@ -46,6 +54,7 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountCon
     EditText phone;
     @BindView(R.id.Create_Account_Password_Input)
     EditText password;
+    Long chooseCountries;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -57,27 +66,78 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountCon
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.createAccountPresenter.onViewCreatedFrag();
 
-    }
 
     @OnClick(R.id.Create_Account_Transition_Login)
     public void clicked() {
         navController.navigate(R.id.action_createAccountFragment_to_loginfragment);
     }
 
+    @OnClick(R.id.Create_Account_Button)
+    public void createBtn(){
+        User user = User.builder()
+                .username(name.getText().toString())
+                .email(email.getText().toString())
+                .password(password.getText().toString())
+                .phone(phone.getText().toString())
+                .city_id(chooseCountries)
+                .build();
+
+        this.createAccountPresenter.login(user,getActivity());
+    }
+
+
+    @Override
+    public void selectCountries(List<Integer> cityId) {
+        countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 chooseCountries = cityId.get(position).longValue();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+    }
+
+    @Override
+    public void success(String message) {
+        CustomToast(0,R.drawable.happy,true,message);
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(mainIntent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void failed(int message) {
+        CustomToast(message,R.drawable.angry,false,"");
+    }
+
+    //SHOW DIALOG
+    @Override
+    public void showLoadingDialog() {
+        LoadingDialogCustom.startDialog(getActivity());
+    }
+
+    //HIDE DIALOG
+    @Override
+    public void hideLoadingDialog() {
+        LoadingDialogCustom.dismissDialog();
+    }
+
+    //GET ALL CITIES
     @Override
     public void callAllCity() {
         this.createAccountPresenter.getAllCityList(getActivity(), countries);
     }
 
+    //CUSTOM TOAST
     @Override
-    public void createAccount() {
-        this.createAccountPresenter.createNewUser(name, email, phone, password, countries, createAccountBtn, getActivity());
+    public void CustomToast(int message,int image,boolean check,String otherMessage) {
+        View view = CustomToast.showMessage(requireActivity(),R.layout.custom_toast_success);
+        view.findViewById(R.id.custom_toast_root).setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(),R.color.blueDark));
+        CustomToast.setToastTextAndImage(view,R.id.success_toast_message_text,check,message,otherMessage,R.id.custom_toast_image,image);
+        CustomToast.toastProperty(requireActivity(), Gravity.AXIS_CLIP,0,600,1000,view);
     }
-
 
 }

@@ -28,11 +28,6 @@ public class ManagerAll extends  BaseManager{
     public  Call<Message> getCreateNewUser(User user){
         return  getRestApiClient().registerUser(user);
     }
-
-    public Call<Long> getWithByNameId(String cityName){
-        return  getRestApiClient().withNameFindId(cityName);
-    }
-
     public Call<Message> getLoginUser(JsonObject jsonObject){
         return  getRestApiClient().loginUser(jsonObject);
     }

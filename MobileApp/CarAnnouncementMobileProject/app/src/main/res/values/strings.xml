@@ -26,5 +26,12 @@
     <string name="Please_Write_New_Password">Zəhmət olmasa şifrə daxil edin.</string>
     <string name="Settings">Parametrlər</string>
     <string name="LogOut">Hesabdan çıx</string>
+    <string name="Login_success">Təşekkurlər Qeydiyyatdan kecdiniz.</string>
     <string name="Check_input"></string>
+    <string name="Email_invalid">Emaildə səhv var</string>
+    <string name="Name_invalid">Ad Sətirini boş saxlamayın </string>
+    <string name="Phone_invalid">Mobil telefon sətirini boş saxlamayın </string>
+    <string name="Email_Row_invalid">Email Sətirini boş saxlamayın </string>
+    <string name="Password_invalid">Şifrə sətrini boş saxlamayın.</string>
+    <string name="Password_length_invalid">Şifrənin uzunluğu minimum 6 simvol olmalıdır.</string>
 </resources>

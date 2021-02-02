@@ -21,9 +21,6 @@ public interface RestApi {
     @POST("user/register")
     Call<Message> registerUser(@Body User user); /*Create New User*/
 
-    @GET("cities/name/{cityName}")
-    Call<Long> withNameFindId(@Path("cityName") String cityName); //City name find Id;
-
     @POST("user/login")
     Call<Message> loginUser(@Body JsonObject jsonObject); //Login user
 
