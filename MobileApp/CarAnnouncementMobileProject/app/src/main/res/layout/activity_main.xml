@@ -23,8 +23,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Menu"
             app:titleMarginStart="@dimen/margin_x_large"
-            app:logo="@drawable/ic_baseline"
-            />
+            app:logo="@drawable/ic_baseline" />
 
 
 

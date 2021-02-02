@@ -26,11 +26,8 @@ public interface ICreateAccountContract {
 
         void callAllCity();
 
-        void createBtn();
-
         void selectCountries(List<Integer> cityId);
 
-        void CustomToast(int message,int image);
 
     }
 

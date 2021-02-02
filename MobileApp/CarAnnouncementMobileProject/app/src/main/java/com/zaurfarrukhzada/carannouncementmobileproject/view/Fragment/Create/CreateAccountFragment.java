@@ -132,7 +132,6 @@ public class CreateAccountFragment extends Fragment implements ICreateAccountCon
     }
 
     //CUSTOM TOAST
-    @Override
     public  void CustomToast(int message,int image) {
         View view = CustomToast.showMessage(requireActivity(),R.layout.custom_toast_success);
         view.findViewById(R.id.custom_toast_root).setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(),R.color.blueDark));
