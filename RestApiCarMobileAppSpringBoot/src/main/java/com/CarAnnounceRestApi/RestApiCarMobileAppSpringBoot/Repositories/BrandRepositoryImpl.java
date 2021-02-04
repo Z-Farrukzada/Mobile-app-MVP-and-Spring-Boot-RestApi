@@ -67,6 +67,7 @@ public class BrandRepositoryImpl implements BrandRepository {
 
     public RowMapper<CarBrand> carBrandRowMapper = (((resultSet, i) -> {
                       return  new CarBrand(resultSet.getInt("id"),
-                                            resultSet.getString("name"));
+                                            resultSet.getString("name"),
+                                            resultSet.getString("logoImage"));
     }));
 }
