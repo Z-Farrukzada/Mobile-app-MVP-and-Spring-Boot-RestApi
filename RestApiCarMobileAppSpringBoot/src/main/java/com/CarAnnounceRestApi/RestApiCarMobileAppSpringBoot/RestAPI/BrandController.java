@@ -1,6 +1,7 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Base64.Convert;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrand;
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrandWithModelCount;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.BrandServices;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.commons.io.FileUtils;
@@ -31,16 +32,12 @@ public class BrandController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Map<String,Object>>> allListBrand() throws IOException {
-        List<CarBrand> carBrandList = brandServices.getAll();
-        List<Map<String,Object>> newdata = new ArrayList<>();
-        for(CarBrand carBrand:carBrandList){
-            Map<String,Object> map = new HashMap<>();
-            map.put("id",carBrand.getId());
-            map.put("name",carBrand.getName());
-            map.put("logoImage", Convert.ConvertBase64(carBrand.getLogoImage()));
-            newdata.add(map);
-        }
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(newdata);
+        return brandList(brandServices.getAll());
+    }
+
+    @GetMapping(value = "/popList",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Map<String,Object>>> popListBrand() throws IOException {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(brandServices.popularBrand());
     }
 
     @GetMapping("/{brandId}")
@@ -63,6 +60,7 @@ public class BrandController {
            map.put("Brand","Updated");
            return  new ResponseEntity<>(map,HttpStatus.OK);
     }
+
     @DeleteMapping("/{brandId}")
     public ResponseEntity<Map<String,String>> deletedBrand(@PathVariable("brandId") int brandId){
            brandServices.delete(brandId);
@@ -72,5 +70,16 @@ public class BrandController {
     }
 
 
+    private ResponseEntity<List<Map<String,Object>>> brandList(List<CarBrand> popularBrand) throws IOException {
+        List<Map<String,Object>> newdata = new ArrayList<>();
+        for(CarBrand carBrand:popularBrand){
+            Map<String,Object> map = new HashMap<>();
+            map.put("id",carBrand.getId());
+            map.put("name",carBrand.getName());
+            map.put("logoImage", Convert.ConvertBase64(carBrand.getLogoImage()));
+            newdata.add(map);
+        }
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(newdata);
+    }
 
 }

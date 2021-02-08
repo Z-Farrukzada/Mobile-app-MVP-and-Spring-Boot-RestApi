@@ -1,6 +1,7 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 
 import com.google.gson.JsonObject;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.AllCarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
@@ -28,7 +29,10 @@ public interface RestApi {
     @POST("user/changePassword")
     Call<Message> changePassword(@Body JsonObject jsonObject);  //ChangeUserPasswordWithEmail
 
+    @GET("brands/popList")
+    Call<List<CarBrand>> getCallPopBrands();   //Call Pop Brands
+
     @GET("brands")
-    Call<List<CarBrand>> getCallAllBrands();   //Call All Brands
+    Call<List<AllCarBrand>> getCallAllBrands();   //Call All Brands
 
 }

@@ -36,6 +36,7 @@
         android:layout_below="@id/brands_recycle"
         android:layout_alignParentEnd="true"
         android:textColor="@color/blueDark"
+        android:layout_marginHorizontal="@dimen/margin_medium"
         android:padding="@dimen/padding_medium"
         android:text="@string/All_Brand"
         android:fontFamily="@font/poppins"

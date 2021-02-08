@@ -4,7 +4,7 @@
     android:layout_width="@dimen/width_large"
     android:background="@color/white"
     android:layout_margin="@dimen/margin_medium"
-    android:layout_height="@dimen/width_medium">
+    android:layout_height="@dimen/height_medium">
 
     <ImageView
         android:id="@+id/brand_logo_image"
@@ -24,12 +24,28 @@
         android:layout_below="@id/brand_logo_image"
         android:layout_alignEnd="@+id/brand_logo_image"
         android:layout_alignParentStart="true"
-       android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="@dimen/margin_medium"
         android:text="Mercedes"
         android:fontFamily="@font/dancing"
         android:textAlignment="center"
         android:textColor="@color/blueDark"
         android:textSize="@dimen/text_x_small" />
+
+
+     <TextView
+         android:id="@+id/brand_item_count_text"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/brand_item_name"
+         android:layout_alignParentStart="true"
+         android:layout_alignEnd="@id/brand_item_name"
+         android:text="5"
+         android:fontFamily="@font/dancing"
+         android:textColor="@color/blueDark"
+         android:layout_marginHorizontal="@dimen/margin_medium"
+         android:textSize="@dimen/text_x_small"
+         android:textAlignment="center"
+         />
 
 </RelativeLayout>

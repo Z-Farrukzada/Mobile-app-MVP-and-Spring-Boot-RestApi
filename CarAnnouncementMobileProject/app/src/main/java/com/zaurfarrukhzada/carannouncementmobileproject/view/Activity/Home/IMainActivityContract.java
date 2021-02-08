@@ -23,6 +23,8 @@ public interface IMainActivityContract {
         void showDialogLoading();
 
         void hideDialogLoading();
+
+        void transitionAllBrandActivity();
     }
 
     interface Presenter{

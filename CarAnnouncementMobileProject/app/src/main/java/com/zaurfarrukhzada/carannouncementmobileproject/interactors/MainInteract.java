@@ -26,7 +26,7 @@ public class MainInteract {
 
     public void getCallAllBrands() {
 
-        Call<List<CarBrand>> callBrand = ManagerAll.getInstance().getCallBrands();
+        Call<List<CarBrand>> callBrand = ManagerAll.getInstance().getCallPopCarBrands();
         callBrand.enqueue(new Callback<List<CarBrand>>() {
             @Override
             public void onResponse(@NotNull Call<List<CarBrand>> call, @NotNull Response<List<CarBrand>> response) {

@@ -2,6 +2,7 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarDetail;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.DetailService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class DetailController {
     @Autowired
     DetailService detailService;
 
-
+    @SneakyThrows
     @GetMapping
     public ResponseEntity<List<CarDetail>> allListCarDetail(){
         return new ResponseEntity<>(detailService.getAll(),HttpStatus.OK);

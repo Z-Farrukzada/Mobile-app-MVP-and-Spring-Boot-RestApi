@@ -2,6 +2,7 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CarColorsService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CarColorController {
     @Autowired
     CarColorsService carColorsService;
 
-
+    @SneakyThrows
     @GetMapping
     public ResponseEntity<List<CarColors>> allListColors(){
          return  new ResponseEntity<>(carColorsService.getAll(),HttpStatus.OK);

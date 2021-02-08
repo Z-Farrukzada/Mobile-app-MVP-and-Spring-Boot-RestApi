@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -20,11 +22,13 @@ import com.zaurfarrukhzada.carannouncementmobileproject.R;
 import com.zaurfarrukhzada.carannouncementmobileproject.adapter.BrandAdapter;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.utils.LoadingDialogCustom;
+import com.zaurfarrukhzada.carannouncementmobileproject.view.Activity.AllBrands.AllBrandActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity implements IMainActivityContract.View{
@@ -88,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.custom_menu, menu);
         return true;
+    }
+
+    @OnClick(R.id.all_brand)
+    public void transitionAllBrandActivity(){
+        Intent allActivityIntent = new Intent(this, AllBrandActivity.class);
+        startActivity(allActivityIntent);
     }
 
     @Override

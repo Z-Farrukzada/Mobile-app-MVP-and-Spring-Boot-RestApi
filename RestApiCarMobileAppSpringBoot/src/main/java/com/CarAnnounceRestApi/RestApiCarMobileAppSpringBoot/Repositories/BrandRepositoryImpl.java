@@ -2,6 +2,7 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.BrandQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrand;
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrandWithModelCount;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
+
 @Repository
 public class BrandRepositoryImpl implements BrandRepository {
 
@@ -21,6 +23,7 @@ public class BrandRepositoryImpl implements BrandRepository {
 
     @Override
     public List<CarBrand> getAll() {
+        
         try{
             return jdbcTemplate.query(BrandQuery.SQL_ALL_BRAND,carBrandRowMapper);
         }catch (Exception e){
@@ -65,9 +68,29 @@ public class BrandRepositoryImpl implements BrandRepository {
           }
     }
 
+    @Override
+    public List<CarBrandWithModelCount> popularBrandList() throws CustomNotFoundException {
+        try{
+            return jdbcTemplate.query(BrandQuery.SQL_BRAND_POPULAR_LIST,carBrandWithModelCountRowMapper);
+        }catch (Exception e){
+            throw  new CustomNotFoundException("Not Found");
+        }
+
+    }
+
     public RowMapper<CarBrand> carBrandRowMapper = (((resultSet, i) -> {
-                      return  new CarBrand(resultSet.getInt("id"),
-                                            resultSet.getString("name"),
-                                            resultSet.getString("logoImage"));
+        return  new CarBrand(resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("logoImage"));
     }));
+
+    public RowMapper<CarBrandWithModelCount> carBrandWithModelCountRowMapper = (((resultSet, i) -> {
+        return  new CarBrandWithModelCount(resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("logoImage"),
+                resultSet.getInt("count"));
+    }));
+
+
+
 }

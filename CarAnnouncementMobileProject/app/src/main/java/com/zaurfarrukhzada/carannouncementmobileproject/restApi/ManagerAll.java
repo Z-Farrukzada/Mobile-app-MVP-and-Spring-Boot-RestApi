@@ -1,6 +1,7 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 
 import com.google.gson.JsonObject;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.AllCarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
@@ -38,7 +39,11 @@ public class ManagerAll extends  BaseManager{
         return  getRestApiClient().changePassword(jsonObject);
     }
 
-    public Call<List<CarBrand>> getCallBrands(){
+    public Call<List<CarBrand>> getCallPopCarBrands(){
+        return getRestApiClient().getCallPopBrands();
+    }
+
+    public Call<List<AllCarBrand>> getCallBrands(){
         return getRestApiClient().getCallAllBrands();
     }
 

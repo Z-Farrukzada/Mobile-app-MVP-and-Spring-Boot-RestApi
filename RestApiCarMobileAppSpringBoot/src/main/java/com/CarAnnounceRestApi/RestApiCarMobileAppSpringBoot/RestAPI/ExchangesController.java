@@ -3,11 +3,13 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Exchanges;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.ExchangeService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +21,9 @@ public class ExchangesController {
     @Autowired
     ExchangeService exchangeService;
 
-
+    @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<Exchanges>> allListExchanges(){
+    public ResponseEntity<List<Exchanges>> allListExchanges() {
         return new ResponseEntity<>(exchangeService.getAll(), HttpStatus.OK);
     }
     @GetMapping("/{exchangeId}")

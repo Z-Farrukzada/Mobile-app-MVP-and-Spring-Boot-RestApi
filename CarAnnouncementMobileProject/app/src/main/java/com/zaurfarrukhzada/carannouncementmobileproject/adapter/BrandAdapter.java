@@ -1,6 +1,7 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -46,11 +47,8 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
     @SneakyThrows
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String name = carBrandList.get(position).getName();
-        String imageUrl = carBrandList.get(position).getLogoImage();
-
-        holder.setName(name);
-        holder.setImage(imageUrl);
+        holder.setHolder(carBrandList.get(position).getName(),carBrandList.get(position).getCount());
+        holder.setImage(carBrandList.get(position).getLogoImage());
 
     }
 
@@ -62,6 +60,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.brand_item_name) TextView brandName;
+        @BindView(R.id.brand_item_count_text) TextView brandItemCount;
         @BindView(R.id.brand_logo_image) ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -70,8 +69,9 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
 
         }
 
-        private void setName(String name){
+        private void setHolder(String name,int count){
             brandName.setText(name);
+            brandItemCount.setText("( " + count +" )");
         }
 
         public void setImage(String imageUrl) {

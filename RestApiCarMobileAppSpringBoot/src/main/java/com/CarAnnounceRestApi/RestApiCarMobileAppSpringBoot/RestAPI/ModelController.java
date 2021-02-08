@@ -2,6 +2,7 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarModel;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.ModelService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ModelController {
     @Autowired
     ModelService modelService;
 
-
+    @SneakyThrows
     @GetMapping
     public ResponseEntity<List<CarModel>>allListModel(){
         return  new ResponseEntity<>(modelService.getAll(), HttpStatus.OK);

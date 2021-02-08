@@ -7,25 +7,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarBrand {
+public class AllCarBrand {
 
-    @SerializedName("id")
-    @Expose
-    private int id;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("logoImage")
-    @Expose
-    private String logoImage;
-    @SerializedName("count")
-    @Expose
-    private int count;
 
+        @SerializedName("id")
+        @Expose
+        private int id;
+        @SerializedName("name")
+        @Expose
+        private String name;
+        @SerializedName("logoImage")
+        @Expose
+        private String logoImage;
 
 }

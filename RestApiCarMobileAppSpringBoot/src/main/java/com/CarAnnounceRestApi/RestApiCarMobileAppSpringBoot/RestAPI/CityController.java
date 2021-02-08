@@ -4,6 +4,7 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.City;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CarColorsService;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CityService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CityController {
     @Autowired
     CityService cityService;
 
-
+    @SneakyThrows
     @GetMapping("/all")
     public ResponseEntity<List<City>> allListCity(){
         return  new ResponseEntity<>(cityService.getAll(),HttpStatus.OK);

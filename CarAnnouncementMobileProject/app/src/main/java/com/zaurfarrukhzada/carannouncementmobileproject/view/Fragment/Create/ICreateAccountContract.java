@@ -1,12 +1,7 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.view.Fragment.Create;
 
 import android.app.Activity;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-
-import androidx.fragment.app.FragmentActivity;
 
 import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
 
