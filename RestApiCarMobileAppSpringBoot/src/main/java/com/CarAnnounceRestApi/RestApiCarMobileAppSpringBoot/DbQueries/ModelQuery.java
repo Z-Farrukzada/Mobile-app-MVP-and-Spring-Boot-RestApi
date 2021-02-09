@@ -10,5 +10,6 @@ public class ModelQuery {
     public  String SQL_NEW_MODEL_CREATED = "INSERT INTO model(name,brandId) VALUES(?,?)";
     public  String SQL_UPDATE_MODEL = "UPDATE model SET name = ? , brandId = ? WHERE id = ?";
     public  String SQL_DELETED_MODEL = "DELETE FROM model  WHERE id = ?";
+    public  String SQL_SELECTED_MODEL_WITH_BRAND = "SELECT m.id,m.name,m.brandId FROM model m JOIN brand b ON m.brandId = b.id WHERE b.id= ?";
 
 }

@@ -3,6 +3,7 @@ package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 import com.google.gson.JsonObject;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.AllCarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.CarModel;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
@@ -11,9 +12,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RestApi {
 
@@ -34,5 +37,8 @@ public interface RestApi {
 
     @GET("brands")
     Call<List<AllCarBrand>> getCallAllBrands();   //Call All Brands
+
+    @GET("models/select/{brandId}")
+    Call<List<CarModel>> getFindByIdModels(@Path("brandId") int id); //Find Car Models by brand id;
 
 }

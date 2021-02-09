@@ -1,6 +1,7 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,18 +26,21 @@ import com.zaurfarrukhzada.carannouncementmobileproject.utils.Convert64;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import lombok.SneakyThrows;
 
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> {
 
 
-     List<CarBrand> carBrandList;
+     private final List<CarBrand> carBrandList;
      Activity activity;
+     RecycleViewInterface recycleViewInterface;
 
-    public BrandAdapter(List<CarBrand> carBrandList, Activity activity) {
+    public BrandAdapter(List<CarBrand> carBrandList, Activity activity,RecycleViewInterface recycleViewInterface) {
         this.carBrandList = carBrandList;
         this.activity = activity;
+        this.recycleViewInterface = recycleViewInterface;
     }
 
     @NonNull
@@ -47,7 +53,8 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
     @SneakyThrows
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setHolder(carBrandList.get(position).getName(),carBrandList.get(position).getCount());
+        holder.setHolder(carBrandList.get(position).getName(),carBrandList.get(position).getCount(),
+                carBrandList.get(position).getId());
         holder.setImage(carBrandList.get(position).getLogoImage());
 
     }
@@ -57,11 +64,12 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
         return carBrandList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.brand_item_name) TextView brandName;
         @BindView(R.id.brand_item_count_text) TextView brandItemCount;
         @BindView(R.id.brand_logo_image) ImageView imageView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,9 +77,14 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
 
         }
 
-        private void setHolder(String name,int count){
+        private void setHolder(String name,int count,int id){
             brandName.setText(name);
             brandItemCount.setText("( " + count +" )");
+
+            brandName.setOnClickListener(v -> {
+              recycleViewInterface.onItemClicked(id);
+            });
+
         }
 
         public void setImage(String imageUrl) {

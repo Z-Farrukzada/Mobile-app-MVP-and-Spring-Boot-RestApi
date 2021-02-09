@@ -3,6 +3,7 @@ package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 import com.google.gson.JsonObject;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.AllCarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.CarModel;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
@@ -45,6 +46,9 @@ public class ManagerAll extends  BaseManager{
 
     public Call<List<AllCarBrand>> getCallBrands(){
         return getRestApiClient().getCallAllBrands();
+    }
+    public Call<List<CarModel>> getFindModelsWithByBrandId(int id){
+        return  getRestApiClient().getFindByIdModels(id);
     }
 
 }

@@ -41,4 +41,10 @@
     <string name="Close">Bağlı</string>
     <string name="Brand">Markalar</string>
     <string name="All_Brand">Bütün Markalar</string>
+    <string name="Models">Modellər</string>
+    <string name="account">Hesab</string>
+    <string name="favorite">Seçilmişlər</string>
+    <string name="camera">Kamera</string>
+    <string name="add_box">Yeni elan</string>
+    <string name="call">Zəng vur</string>
 </resources>

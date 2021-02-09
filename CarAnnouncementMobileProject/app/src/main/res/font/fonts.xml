@@ -22,4 +22,9 @@
         android:font="@font/poppins"
         tools:targetApi="o" />
 
+    <font
+        android:fontStyle="normal"
+        android:font="@font/guarjada"
+        tools:targetApi="o" />
+
 </font-family>

@@ -16,8 +16,11 @@
         android:theme="@style/Theme.CarAnnouncementMobileProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.Activity.AllBrands.AllBrandActivity"
+        <activity android:name=".view.Activity.Models.ModelActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".view.Activity.AllBrands.AllBrandActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".view.Activity.Register.RegisterActivity"
             android:theme="@style/FullScreen" />

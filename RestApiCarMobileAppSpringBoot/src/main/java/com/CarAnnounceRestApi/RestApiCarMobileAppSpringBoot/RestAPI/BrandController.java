@@ -45,6 +45,7 @@ public class BrandController {
          return  new ResponseEntity<>(brandServices.findById(brandId),HttpStatus.OK);
     }
 
+
     @PostMapping("/createBrand")
     public ResponseEntity<Map<String,String>> addBrand(@RequestBody CarBrand carBrand){
            brandServices.add(carBrand);

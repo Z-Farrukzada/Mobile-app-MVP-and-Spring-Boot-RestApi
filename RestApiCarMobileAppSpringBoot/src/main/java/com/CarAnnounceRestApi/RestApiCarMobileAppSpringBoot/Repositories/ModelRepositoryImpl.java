@@ -1,10 +1,14 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.ModelQuery;
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.UserQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarModel;
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.User;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ModelRepositoryImpl implements  ModelRepository{
@@ -72,9 +77,22 @@ public class ModelRepositoryImpl implements  ModelRepository{
 
     }
 
+    @Override
+    public List<CarModel> FindModelByBrand(int id) throws CustomNotFoundException {
+        try{
+            return  jdbcTemplate.query(ModelQuery.SQL_SELECTED_MODEL_WITH_BRAND,carModelRowMapper,id);
+        }catch (Exception e){
+            throw new CustomNotFoundException("Not found");
+        }
+    }
+
+
     public RowMapper<CarModel> carModelRowMapper = ((resultSet, i) -> {
          return  new CarModel(resultSet.getInt("id"),
                                resultSet.getString("name"),
                                 resultSet.getInt("brandId"));
     });
+
+
+
 }

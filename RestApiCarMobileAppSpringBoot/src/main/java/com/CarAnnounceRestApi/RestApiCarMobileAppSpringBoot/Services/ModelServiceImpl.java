@@ -3,10 +3,13 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarModel;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -38,5 +41,10 @@ public class ModelServiceImpl implements  ModelService{
     @Override
     public void delete(int id) {
       modelRepository.delete(id);
+    }
+
+    @Override
+    public  List<CarModel> FindByModelByBrandId(int id) {
+        return modelRepository.FindModelByBrand(id);
     }
 }

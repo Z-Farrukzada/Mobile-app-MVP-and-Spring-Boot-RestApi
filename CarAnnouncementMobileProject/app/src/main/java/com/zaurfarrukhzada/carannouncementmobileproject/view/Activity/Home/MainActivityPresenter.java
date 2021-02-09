@@ -22,6 +22,7 @@ public class MainActivityPresenter  implements IMainActivityContract.Presenter{
         this.mView.init();
         this.mView.setDrawer();
         this.mView.brandRecycleConfig();
+        this.mView.bottomNavConfig();
         this.mView.getAllBrands();
     }
 

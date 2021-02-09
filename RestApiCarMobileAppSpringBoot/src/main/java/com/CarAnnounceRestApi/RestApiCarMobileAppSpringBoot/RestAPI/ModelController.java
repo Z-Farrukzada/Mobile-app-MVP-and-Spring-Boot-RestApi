@@ -24,10 +24,18 @@ public class ModelController {
     public ResponseEntity<List<CarModel>>allListModel(){
         return  new ResponseEntity<>(modelService.getAll(), HttpStatus.OK);
     }
+
     @GetMapping("/{modelId}")
     public ResponseEntity<CarModel> findByIdModel(@PathVariable("modelId") int modelId){
         return new ResponseEntity<>(modelService.findById(modelId),HttpStatus.OK);
     }
+
+    @GetMapping("/select/{brandId}")
+    public ResponseEntity<List<CarModel>> findBymModelByBrandId(@PathVariable("brandId") int brandId){
+        return new ResponseEntity<>(modelService.FindByModelByBrandId(brandId),HttpStatus.OK);
+    }
+
+
     @PostMapping("/created")
     public ResponseEntity<Map<String,String>> createdNewModel(@RequestBody CarModel carModel){
         Map<String,String> map = new HashMap<>();
@@ -35,6 +43,7 @@ public class ModelController {
         map.put("New Model","Created");
         return  new ResponseEntity<>(map,HttpStatus.CREATED);
     }
+
      @PutMapping("/updated")
     public ResponseEntity<Map<String,String>> updateModel(@RequestBody CarModel carModel){
          Map<String,String> map = new HashMap<>();
@@ -42,6 +51,7 @@ public class ModelController {
          map.put("Model","Updated");
          return new ResponseEntity<>(map,HttpStatus.OK);
      }
+
      @DeleteMapping("/{modelId}")
     public ResponseEntity<Map<String,String>> deleteModel(@PathVariable("modelId") int modelId){
         Map<String,String> map = new HashMap<>();

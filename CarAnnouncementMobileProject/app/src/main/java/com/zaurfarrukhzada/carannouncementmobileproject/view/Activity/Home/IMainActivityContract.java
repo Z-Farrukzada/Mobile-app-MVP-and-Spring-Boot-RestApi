@@ -25,6 +25,8 @@ public interface IMainActivityContract {
         void hideDialogLoading();
 
         void transitionAllBrandActivity();
+
+        void bottomNavConfig();
     }
 
     interface Presenter{

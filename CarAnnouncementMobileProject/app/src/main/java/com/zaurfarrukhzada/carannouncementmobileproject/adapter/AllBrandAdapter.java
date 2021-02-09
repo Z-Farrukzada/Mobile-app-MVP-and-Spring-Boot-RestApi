@@ -30,11 +30,13 @@ public class AllBrandAdapter extends RecyclerView.Adapter<AllBrandAdapter.ViewHo
     List<AllCarBrand> allCarBrandList;
     List<AllCarBrand> allList;
     Activity activity;
+    RecycleViewInterface recycleViewInterface;
 
-    public AllBrandAdapter(List<AllCarBrand> allCarBrandList, Activity activity) {
+    public AllBrandAdapter(List<AllCarBrand> allCarBrandList, Activity activity,RecycleViewInterface recycleViewInterface) {
         this.allCarBrandList = allCarBrandList;
         this.allList = new ArrayList<>(allCarBrandList);
         this.activity = activity;
+        this.recycleViewInterface = recycleViewInterface;
     }
 
     @NonNull
@@ -46,7 +48,7 @@ public class AllBrandAdapter extends RecyclerView.Adapter<AllBrandAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull AllBrandAdapter.ViewHolder holder, int position) {
-           holder.setName(allCarBrandList.get(position).getName());
+           holder.setName(allCarBrandList.get(position).getName(),allCarBrandList.get(position).getId());
            holder.setImage(allCarBrandList.get(position).getLogoImage());
     }
 
@@ -101,8 +103,12 @@ public class AllBrandAdapter extends RecyclerView.Adapter<AllBrandAdapter.ViewHo
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
-        public void setName(String name){
+        public void setName(String name,int id){
+
             allBrandItemName.setText(name);
+            allBrandItemName.setOnClickListener(v -> {
+                recycleViewInterface.onItemClicked(id);
+            });
         }
 
         public void setImage(String imageUrl) {
