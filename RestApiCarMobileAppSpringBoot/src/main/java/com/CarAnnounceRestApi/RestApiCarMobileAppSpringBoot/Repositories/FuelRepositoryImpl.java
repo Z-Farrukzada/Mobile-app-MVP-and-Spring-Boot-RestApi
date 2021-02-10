@@ -21,53 +21,35 @@ public class FuelRepositoryImpl implements  FuelRepository{
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<CarFuelType> getAll() throws CustomNotFoundException {
-        try {
+    public List<CarFuelType> getAll() {
             return jdbcTemplate.query(FuelQuery.SQL_ALL_LIST_FUELS,carFuelTypeRowMapper);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public CarFuelType findById(int id) throws CustomNotFoundException {
-        try {
+    public CarFuelType findById(int id){
             return jdbcTemplate.queryForObject(FuelQuery.SQL_FIND_By_ID,carFuelTypeRowMapper,id);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public void add(CarFuelType entity) throws CustomBadRequest {
-        try{
+    public void add(CarFuelType entity) {
             jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(FuelQuery.SQL_CREATED_FUEL, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1,entity.getName());
                 return ps;
             });
-        }catch (Exception e){
-            throw  new CustomBadRequest(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public void update(CarFuelType entity) throws CustomBadRequest {
-        try{
+    public void update(CarFuelType entity) {
             jdbcTemplate.update(FuelQuery.SQL_UPDATED_FUEL,entity.getName(),entity.getId());
-        }catch (Exception e){
-            throw  new CustomBadRequest(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
-        try{
+    public void delete(int id){
             jdbcTemplate.update(FuelQuery.SQL_DELETED_FUEL,id);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
+
     }
+
     private final RowMapper<CarFuelType> carFuelTypeRowMapper = ((resultSet, i) -> {
         return  new CarFuelType(resultSet.getInt("id"),
                 resultSet.getString("name"));

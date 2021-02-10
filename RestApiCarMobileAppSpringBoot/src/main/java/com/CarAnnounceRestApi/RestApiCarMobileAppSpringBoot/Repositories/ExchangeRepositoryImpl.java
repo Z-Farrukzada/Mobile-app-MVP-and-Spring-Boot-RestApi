@@ -22,53 +22,34 @@ public class ExchangeRepositoryImpl implements  ExchangesRepository{
 
 
     @Override
-    public List<Exchanges> getAll() throws CustomNotFoundException {
-        try {
+    public List<Exchanges> getAll(){
            return jdbcTemplate.query(ExchangeQuery.SQL_ALL_LIST_EXCHANGES,exchangesRowMapper);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public Exchanges findById(int id) throws CustomNotFoundException {
-        try {
+    public Exchanges findById(int id) {
             return jdbcTemplate.queryForObject(ExchangeQuery.SQL_FIND_By_ID,exchangesRowMapper,id);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public void add(Exchanges entity) throws CustomBadRequest {
-           try{
+    public void add(Exchanges entity){
                jdbcTemplate.update(connection -> {
                    PreparedStatement ps = connection.prepareStatement(ExchangeQuery.SQL_CREATED_EXCHANGE, Statement.RETURN_GENERATED_KEYS);
                    ps.setString(1,entity.getName());
                    return ps;
                });
-           }catch (Exception e){
-               throw  new CustomBadRequest(e.getLocalizedMessage());
-           }
     }
 
     @Override
-    public void update(Exchanges entity) throws CustomBadRequest {
-        try{
+    public void update(Exchanges entity) {
             jdbcTemplate.update(ExchangeQuery.SQL_UPDATED_EXCHANGE,entity.getName(),entity.getId());
-        }catch (Exception e){
-            throw  new CustomBadRequest(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
-          try{
+    public void delete(int id) {
               jdbcTemplate.update(ExchangeQuery.SQL_DELETED_EXCHANGE,id);
-          }catch (Exception e){
-              throw  new CustomNotFoundException(e.getLocalizedMessage());
-          }
     }
+
     private final RowMapper<Exchanges> exchangesRowMapper = ((resultSet, i) -> {
        return  new Exchanges(resultSet.getInt("id"),
                              resultSet.getString("name"));

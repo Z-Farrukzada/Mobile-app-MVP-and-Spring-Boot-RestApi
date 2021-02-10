@@ -27,26 +27,17 @@ public class CommentRepositoryImpl implements  CommentRepository{
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Comment> getAll() throws CustomNotFoundException {
-        try {
+    public List<Comment> getAll() {
             return jdbcTemplate.query(CommentQuery.SQL_ALL_COMMENT_LIST,commentRowMapper);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public Comment findById(int id) throws CustomNotFoundException {
-        try{
+    public Comment findById(int id)  {
             return  jdbcTemplate.queryForObject(CommentQuery.SQL_FIND_BY_ID,commentRowMapper,id);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public void add(Comment entity) throws CustomBadRequest {
-         try{
+    public void add(Comment entity){
              jdbcTemplate.update(connection -> {
                  PreparedStatement ps = connection.prepareStatement(CommentQuery.SQL_CREATED_COMMENT, Statement.RETURN_GENERATED_KEYS);
                  ps.setString(1,entity.getComment());
@@ -55,28 +46,18 @@ public class CommentRepositoryImpl implements  CommentRepository{
                  ps.setInt(4,entity.getAnnouncementId());
                  return ps;
              });
-         }catch (Exception e){
-             throw  new CustomBadRequest(e.getLocalizedMessage());
-         }
     }
 
     @Override
-    public void update(Comment entity) throws CustomBadRequest {
-         try{
+    public void update(Comment entity){
              jdbcTemplate.update(CommentQuery.SQL_UPDATED_COMMENT,entity.getComment(),entity.getWritetime(),entity.getId());
-         }catch (Exception e){
-             throw  new CustomNotFoundException(e.getLocalizedMessage());
-         }
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
-        try {
+    public void delete(int id) {
              jdbcTemplate.update(CommentQuery.SQL_DELETED_COMMENT,id);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
+
     @Override
     public boolean isFindUserAndAnnounce(Comment comment) {
         List<Comment> query = jdbcTemplate.query(CommentQuery.SQL_FIND_USER_AND_ANNOUNCEMENT,commentRowMapper,comment.getId(),

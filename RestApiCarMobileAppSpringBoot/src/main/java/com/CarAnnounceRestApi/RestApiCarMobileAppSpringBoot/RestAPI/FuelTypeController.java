@@ -1,5 +1,6 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.FuelDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarDetail;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarFuelType;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.DetailService;
@@ -24,32 +25,28 @@ public class FuelTypeController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<CarFuelType>> allListCarFuels(){
+    public ResponseEntity<List<FuelDTO>> allListCarFuels(){
         return new ResponseEntity<>(fuelTypeService.getAll(), HttpStatus.OK);
     }
+
     @GetMapping("{fuelId}")
-    public ResponseEntity<CarFuelType> findByIdFuel(@PathVariable("fuelId") int fuelId){
+    public ResponseEntity<FuelDTO> findByIdFuel(@PathVariable("fuelId") int fuelId){
         return  new ResponseEntity<>(fuelTypeService.findById(fuelId),HttpStatus.OK);
     }
+
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createdNewFuel(@RequestBody CarFuelType carFuelType){
-        fuelTypeService.add(carFuelType);
-        Map<String,String> map = new HashMap<>();
-        map.put("New Fuel","Created");
-        return new ResponseEntity<>(map,HttpStatus.CREATED);
+    public ResponseEntity<Map<String,String>> createdNewFuel(@RequestBody FuelDTO fuelDTO){
+        return new ResponseEntity<>(fuelTypeService.add(fuelDTO),HttpStatus.CREATED);
     }
+
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updatedFuel(@RequestBody CarFuelType carFuelType){
-        fuelTypeService.update(carFuelType);
-        Map<String,String> map = new HashMap<>();
-        map.put("Fuel","Updated");
-        return  new ResponseEntity<>(map,HttpStatus.OK);
+    public ResponseEntity<Map<String,String>> updatedFuel(@RequestBody FuelDTO fuelDTO){
+        return  new ResponseEntity<>( fuelTypeService.update(fuelDTO),HttpStatus.OK);
     }
+
     @DeleteMapping("/{fuelId}")
     public ResponseEntity<Map<String,String>> deletedDetail(@PathVariable("fuelId") int fuelId){
-        fuelTypeService.delete(fuelId);
-        Map<String,String> map = new HashMap<>();
-        map.put("Fuel","Deleted");
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        return new ResponseEntity<>(fuelTypeService.delete(fuelId),HttpStatus.OK);
     }
+
 }

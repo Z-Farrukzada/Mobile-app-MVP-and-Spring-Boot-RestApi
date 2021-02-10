@@ -1,5 +1,6 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.DetailDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarDetail;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.DetailService;
 import lombok.SneakyThrows;
@@ -21,32 +22,27 @@ public class DetailController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<CarDetail>> allListCarDetail(){
+    public ResponseEntity<List<DetailDTO>> allListCarDetail(){
         return new ResponseEntity<>(detailService.getAll(),HttpStatus.OK);
     }
+
     @GetMapping("{detailId}")
-    public ResponseEntity<CarDetail> findByIdDetail(@PathVariable("detailId") int detailId){
+    public ResponseEntity<DetailDTO> findByIdDetail(@PathVariable("detailId") int detailId){
         return  new ResponseEntity<>(detailService.findById(detailId),HttpStatus.OK);
     }
+
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createdNewDetails(@RequestBody CarDetail carDetail){
-        detailService.add(carDetail);
-        Map<String,String> map = new HashMap<>();
-        map.put("New Detail","Created");
-        return new ResponseEntity<>(map,HttpStatus.CREATED);
+    public ResponseEntity<Map<String,String>> createdNewDetails(@RequestBody DetailDTO detailDTO){
+        return new ResponseEntity<>(detailService.add(detailDTO),HttpStatus.CREATED);
     }
+
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updatedDetail(@RequestBody CarDetail carDetail){
-        detailService.update(carDetail);
-        Map<String,String> map = new HashMap<>();
-        map.put("Detail","Updated");
-        return  new ResponseEntity<>(map,HttpStatus.OK);
+    public ResponseEntity<Map<String,String>> updatedDetail(@RequestBody DetailDTO detailDTO){
+        return  new ResponseEntity<>(detailService.update(detailDTO),HttpStatus.OK);
     }
+
     @DeleteMapping("{detailId}")
     public ResponseEntity<Map<String,String>> deletedDetail(@PathVariable("detailId") int detailId){
-        detailService.delete(detailId);
-        Map<String,String> map = new HashMap<>();
-        map.put("Detail","Deleted");
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        return new ResponseEntity<>(detailService.delete(detailId),HttpStatus.OK);
     }
 }

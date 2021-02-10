@@ -1,10 +1,13 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services;
 
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.CommentDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Comment;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.BaseService.IBaseService;
 
-public interface CommentService extends IBaseService<Comment> {
+import java.util.Map;
 
-    boolean findUserAndAnnouncement(Comment comment);
+public interface CommentService extends IBaseService<CommentDTO> {
+
+    Map<String,String> findUserAndAnnouncement(CommentDTO comment);
 
 }

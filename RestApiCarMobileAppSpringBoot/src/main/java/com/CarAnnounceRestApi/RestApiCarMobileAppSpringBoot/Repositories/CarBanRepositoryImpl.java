@@ -20,53 +20,34 @@ public class CarBanRepositoryImpl implements CarBanRepository {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<CarBan> getAll() throws CustomNotFoundException {
-        try {
-            return jdbcTemplate.query(CarBanQuery.SQL_ALL_LIST_CAR_BANS,carBanRowMapper);
-        }catch (Exception e){
-            throw  new CustomNotFoundException(e.getLocalizedMessage());
-        }
+    public List<CarBan> getAll(){
+        return jdbcTemplate.query(CarBanQuery.SQL_ALL_LIST_CAR_BANS,carBanRowMapper);
     }
 
     @Override
-    public CarBan findById(int id) throws CustomNotFoundException {
-        try{
-            return jdbcTemplate.queryForObject(CarBanQuery.SQL_FIND_BY_ID_BAN,carBanRowMapper,id);
-        }catch (Exception e){
-            throw new CustomNotFoundException(e.getLocalizedMessage());
-        }
+    public CarBan findById(int id){
+        return jdbcTemplate.queryForObject(CarBanQuery.SQL_FIND_BY_ID_BAN,carBanRowMapper,id);
     }
 
     @Override
-    public void add(CarBan entity) throws CustomBadRequest {
-         try{
-             jdbcTemplate.update(connection -> {
-                 PreparedStatement ps = connection.prepareStatement(CarBanQuery.SQL_CREATED_BAN, Statement.RETURN_GENERATED_KEYS);
-                 ps.setString(1,entity.getName());
-                 return ps;
-             });
-         }catch (Exception e){
-             throw  new CustomBadRequest(e.getLocalizedMessage());
-         }
+    public void add(CarBan entity){
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(CarBanQuery.SQL_CREATED_BAN, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,entity.getName());
+            return ps;
+        });
     }
 
     @Override
-    public void update(CarBan entity) throws CustomBadRequest {
-           try{
-               jdbcTemplate.update(CarBanQuery.SQL_UPDATED_BAN,entity.getName(),entity.getId());
-           }catch (Exception e){
-               throw new CustomBadRequest(e.getLocalizedMessage());
-           }
+    public void update(CarBan entity){
+        jdbcTemplate.update(CarBanQuery.SQL_UPDATED_BAN,entity.getName(),entity.getId());
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
-            try {
-                jdbcTemplate.update(CarBanQuery.SQL_DELETED_BAN,id);
-            }catch (Exception e){
-                throw  new CustomBadRequest(e.getLocalizedMessage());
-            }
+    public void delete(int id) {
+        jdbcTemplate.update(CarBanQuery.SQL_DELETED_BAN, id);
     }
+
     public RowMapper<CarBan> carBanRowMapper = (((resultSet, i) -> {
         return  new CarBan(resultSet.getInt("id"),
                 resultSet.getString("name"));

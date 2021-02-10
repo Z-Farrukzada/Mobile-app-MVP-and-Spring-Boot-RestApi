@@ -25,67 +25,40 @@ public class ModelRepositoryImpl implements  ModelRepository{
     JdbcTemplate jdbcTemplate;
 
 
-
     @Override
-    public List<CarModel> getAll() throws CustomNotFoundException {
-        try{
+    public List<CarModel> getAll(){
             return jdbcTemplate.query(ModelQuery.SQL_ALL_LIST_MODELS,carModelRowMapper);
-        }catch (Exception e){
-            throw new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
     public CarModel findById(int id) throws CustomNotFoundException {
-        try{
             return  jdbcTemplate.queryForObject(ModelQuery.SQL_FIND_BY_ID_MODEL,carModelRowMapper,id);
-        }catch (Exception e){
-            throw new CustomNotFoundException(e.getLocalizedMessage());
-        }
     }
 
     @Override
     public void add(CarModel entity) throws CustomBadRequest {
-        try{
              jdbcTemplate.update(connection -> {
                  PreparedStatement ps = connection.prepareStatement(ModelQuery.SQL_NEW_MODEL_CREATED, Statement.RETURN_GENERATED_KEYS);
                  ps.setString(1,entity.getName());
                  ps.setInt(2,entity.getBrandId());
                  return ps;
              });
-        }catch (Exception e){
-            throw  new CustomBadRequest(e.getLocalizedMessage());
-        }
     }
 
     @Override
     public void update(CarModel entity) throws CustomBadRequest {
-          try{
               jdbcTemplate.update(ModelQuery.SQL_UPDATE_MODEL,entity.getName(),entity.getBrandId(),entity.getId());
-          }catch (Exception e){
-              throw  new CustomBadRequest(e.getLocalizedMessage());
-          }
     }
 
     @Override
     public void delete(int id) throws CustomNotFoundException {
-        try{
              jdbcTemplate.update(ModelQuery.SQL_DELETED_MODEL,id);
-        }catch (Exception e){
-            throw new CustomNotFoundException(e.getLocalizedMessage());
-        }
-
     }
 
     @Override
     public List<CarModel> FindModelByBrand(int id) throws CustomNotFoundException {
-        try{
             return  jdbcTemplate.query(ModelQuery.SQL_SELECTED_MODEL_WITH_BRAND,carModelRowMapper,id);
-        }catch (Exception e){
-            throw new CustomNotFoundException("Not found");
-        }
     }
-
 
     public RowMapper<CarModel> carModelRowMapper = ((resultSet, i) -> {
          return  new CarModel(resultSet.getInt("id"),

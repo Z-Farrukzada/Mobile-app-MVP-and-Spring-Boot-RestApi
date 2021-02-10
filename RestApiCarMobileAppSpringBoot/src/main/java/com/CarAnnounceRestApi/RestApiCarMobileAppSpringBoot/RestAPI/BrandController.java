@@ -1,5 +1,6 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Base64.Convert;
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.BrandDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrand;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrandWithModelCount;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.BrandServices;
@@ -41,39 +42,29 @@ public class BrandController {
     }
 
     @GetMapping("/{brandId}")
-    public ResponseEntity<CarBrand> findByIdBrand(@PathVariable("brandId") int brandId){
+    public ResponseEntity<BrandDTO> findByIdBrand(@PathVariable("brandId") int brandId){
          return  new ResponseEntity<>(brandServices.findById(brandId),HttpStatus.OK);
     }
 
-
     @PostMapping("/createBrand")
-    public ResponseEntity<Map<String,String>> addBrand(@RequestBody CarBrand carBrand){
-           brandServices.add(carBrand);
-           Map<String,String> map = new HashMap<>();
-           map.put("Brand","Created");
-           return  new ResponseEntity<>(map,HttpStatus.CREATED);
+    public ResponseEntity<Map<String,String>> addBrand(@RequestBody BrandDTO brandDto){
+        return  new ResponseEntity<>(brandServices.add(brandDto),HttpStatus.CREATED);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updatedBrand(@RequestBody CarBrand carBrand){
-           brandServices.update(carBrand);
-           Map<String,String> map = new HashMap<>();
-           map.put("Brand","Updated");
-           return  new ResponseEntity<>(map,HttpStatus.OK);
+    public ResponseEntity<Map<String,String>> updatedBrand(@RequestBody BrandDTO brandDTO){
+        return  new ResponseEntity<>(brandServices.update(brandDTO),HttpStatus.OK);
     }
 
     @DeleteMapping("/{brandId}")
     public ResponseEntity<Map<String,String>> deletedBrand(@PathVariable("brandId") int brandId){
-           brandServices.delete(brandId);
-           Map<String,String> map = new HashMap<>();
-           map.put("Brand","Deleted");
-           return  new ResponseEntity<>(map,HttpStatus.OK);
+        return  new ResponseEntity<>(brandServices.delete(brandId),HttpStatus.OK);
     }
 
 
-    private ResponseEntity<List<Map<String,Object>>> brandList(List<CarBrand> popularBrand) throws IOException {
+    private ResponseEntity<List<Map<String,Object>>> brandList(List<BrandDTO> popularBrand) throws IOException {
         List<Map<String,Object>> newdata = new ArrayList<>();
-        for(CarBrand carBrand:popularBrand){
+        for(BrandDTO carBrand:popularBrand){
             Map<String,Object> map = new HashMap<>();
             map.put("id",carBrand.getId());
             map.put("name",carBrand.getName());

@@ -1,12 +1,12 @@
-package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain;
+package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class CarModel {
+public class ModelDTO {
     private  int id;
     private  String name;
     private  int brandId;

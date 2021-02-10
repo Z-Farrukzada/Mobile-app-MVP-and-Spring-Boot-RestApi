@@ -1,5 +1,6 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.CommentDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Comment;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CommentService;
 import lombok.SneakyThrows;
@@ -22,42 +23,28 @@ public class CommentController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<Comment>> getAllListComment() {
+    public ResponseEntity<List<CommentDTO>> getAllListComment() {
         return new ResponseEntity<>(commentService.getAll(),HttpStatus.OK);
     }
+
     @GetMapping("/{commentId}")
-    public ResponseEntity<Comment> findByIdComment(@PathVariable("commentId") int commentId){
+    public ResponseEntity<CommentDTO> findByIdComment(@PathVariable("commentId") int commentId){
         return new ResponseEntity<>(commentService.findById(commentId),HttpStatus.OK);
     }
+
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createdNewComment(@RequestBody Comment comment){
-           commentService.add(comment);
-           Map<String,String> map = new HashMap<>();
-           map.put("New comment","Created");
-           return  new ResponseEntity<>(map,HttpStatus.CREATED);
+    public ResponseEntity<Map<String,String>> createdNewComment(@RequestBody CommentDTO commentDTO){
+           return  new ResponseEntity<>(commentService.add(commentDTO),HttpStatus.CREATED);
     }
+
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updateComment(@RequestBody Comment comment){
-        Map<String,String> map = new HashMap<>();
-        boolean isExist = commentService.findUserAndAnnouncement(comment);
-        if(isExist){
-            commentService.update(comment);
-            map.put("Comment","Updated");
-        }else{
-            map.put("Comment","This ad is not yours");
-        }
-        return  new ResponseEntity<>(map,HttpStatus.OK);
+    public ResponseEntity<Map<String,String>> updateComment(@RequestBody CommentDTO commentDTO){
+        return  new ResponseEntity<>(commentService.findUserAndAnnouncement(commentDTO),HttpStatus.OK);
     }
+
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Map<String,String>> deletedComment(@PathVariable("commentId") int commentId){
-             Map<String,String> map = new HashMap<>();
-             commentService.delete(commentId);
-             map.put("Comment","Deleted");
-        return  new ResponseEntity<>(map,HttpStatus.OK);
+        return  new ResponseEntity<>(commentService.delete(commentId),HttpStatus.OK);
     }
-
-
-
-
 
 }

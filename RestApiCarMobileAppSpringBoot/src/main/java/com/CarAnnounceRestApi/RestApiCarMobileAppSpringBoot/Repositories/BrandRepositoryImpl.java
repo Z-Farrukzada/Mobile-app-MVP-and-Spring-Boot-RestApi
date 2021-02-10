@@ -23,59 +23,35 @@ public class BrandRepositoryImpl implements BrandRepository {
 
     @Override
     public List<CarBrand> getAll() {
-        
-        try{
-            return jdbcTemplate.query(BrandQuery.SQL_ALL_BRAND,carBrandRowMapper);
-        }catch (Exception e){
-            throw  new CustomNotFoundException("Not Found");
-        }
+        return jdbcTemplate.query(BrandQuery.SQL_ALL_BRAND,carBrandRowMapper);
     }
+
     @Override
     public CarBrand findById(int brandId) {
-        try{
             return jdbcTemplate.queryForObject(BrandQuery.SQL_FIND_BY_ID_BRAND,carBrandRowMapper,brandId);
-        }catch (Exception e){
-            throw  new CustomNotFoundException("This brand is not");
-        }
     }
+
     @Override
     public void add(CarBrand carBrand) {
-           try{
-               jdbcTemplate.update(connection -> {
-                   PreparedStatement ps = connection.prepareStatement(BrandQuery.SQL_CREATE_NEW_BRAND, Statement.RETURN_GENERATED_KEYS);
-                   ps.setString(1,carBrand.getName());
-                   return ps;
-               });
-           }catch (Exception e){
-               throw  new CustomBadRequest("Not created");
-           }
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(BrandQuery.SQL_CREATE_NEW_BRAND, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,carBrand.getName());
+            return ps;
+        });
+
     }
     @Override
     public void update(CarBrand carBrand) {
-        try {
             jdbcTemplate.update(BrandQuery.SQL_UPDATED_BRAND,carBrand.getName(),carBrand.getId());
-        }catch (Exception e){
-            throw new CustomBadRequest("Not updated");
-        }
-
     }
     @Override
-    public void delete(int brandId) throws CustomNotFoundException {
-          try{
-              jdbcTemplate.update(BrandQuery.SQL_DELETED_BRAND,brandId);
-          }catch (Exception e){
-              throw  new CustomBadRequest("Not deleted");
-          }
+    public void delete(int brandId) {
+            jdbcTemplate.update(BrandQuery.SQL_DELETED_BRAND,brandId);
     }
 
     @Override
-    public List<CarBrandWithModelCount> popularBrandList() throws CustomNotFoundException {
-        try{
+    public List<CarBrandWithModelCount> popularBrandList() {
             return jdbcTemplate.query(BrandQuery.SQL_BRAND_POPULAR_LIST,carBrandWithModelCountRowMapper);
-        }catch (Exception e){
-            throw  new CustomNotFoundException("Not Found");
-        }
-
     }
 
     public RowMapper<CarBrand> carBrandRowMapper = (((resultSet, i) -> {

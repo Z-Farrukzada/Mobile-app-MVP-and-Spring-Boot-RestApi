@@ -7,9 +7,9 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNot
 import java.util.List;
 
 public interface IBaseRepository<T>{
-    List<T> getAll() throws CustomNotFoundException;
-    T findById(int id) throws CustomNotFoundException;
-    void add(T entity) throws CustomBadRequest;
-    void update(T entity) throws CustomBadRequest;
-    void delete(int id) throws  CustomNotFoundException;
+    List<T> getAll();
+    T findById(int id);
+    void add(T entity);
+    void update(T entity);
+    void delete(int id);
 }

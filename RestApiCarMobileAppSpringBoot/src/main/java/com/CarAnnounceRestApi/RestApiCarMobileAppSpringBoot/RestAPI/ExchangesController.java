@@ -1,5 +1,6 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 
+import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.ExchangesDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Exchanges;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.ExchangeService;
@@ -23,32 +24,28 @@ public class ExchangesController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<Exchanges>> allListExchanges() {
+    public ResponseEntity<List<ExchangesDTO>> allListExchanges() {
         return new ResponseEntity<>(exchangeService.getAll(), HttpStatus.OK);
     }
+
     @GetMapping("/{exchangeId}")
-    public ResponseEntity<Exchanges> findByIdExchange(@PathVariable("exchangeId") int exchangeId){
+    public ResponseEntity<ExchangesDTO> findByIdExchange(@PathVariable("exchangeId") int exchangeId){
         return  new ResponseEntity<>(exchangeService.findById(exchangeId),HttpStatus.OK);
     }
+
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createNewExchange(@RequestBody Exchanges exchanges){
-        exchangeService.add(exchanges);
-        Map<String,String> map = new HashMap<>();
-        map.put("New Exchange","Created");
-        return new ResponseEntity<>(map,HttpStatus.CREATED);
+    public ResponseEntity<Map<String,String>> createNewExchange(@RequestBody ExchangesDTO exchangesDto){
+        return new ResponseEntity<>(exchangeService.add(exchangesDto),HttpStatus.CREATED);
     }
+
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>>  updateExchange(@RequestBody Exchanges exchanges){
-        exchangeService.update(exchanges);
-        Map<String,String> map = new HashMap<>();
-        map.put("Exchange","Updated");
-        return new ResponseEntity<>(map,HttpStatus.OK);
+    public ResponseEntity<Map<String,String>>  updateExchange(@RequestBody ExchangesDTO exchangesDto){
+        return new ResponseEntity<>(exchangeService.update(exchangesDto),HttpStatus.OK);
     }
+
     @DeleteMapping("/{exchangeId}")
     public ResponseEntity<Map<String,String>> deleteExchange(@PathVariable("exchangeId") int exchangeId){
-        exchangeService.delete(exchangeId);
-        Map<String,String> map = new HashMap<>();
-        map.put("Exchange","Deleted");
-        return  new ResponseEntity<>(map,HttpStatus.OK);
+        return  new ResponseEntity<>(exchangeService.delete(exchangeId),HttpStatus.OK);
     }
+
 }
