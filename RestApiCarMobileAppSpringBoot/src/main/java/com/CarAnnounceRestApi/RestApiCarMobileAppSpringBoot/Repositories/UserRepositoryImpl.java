@@ -48,14 +48,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findEmailAndPassword(String email, String password) throws CustomAuthException {
         try {
-            User user = jdbcTemplate.queryForObject(UserQuery.SQL_USER_FIND_EMAIL, userRowMapper, email);
-            assert user != null;
-            if (!user.getPassword().equals(password)) {
-                throw new CustomAuthException("Invalid email and password");
-            }
-            return user;
+            return jdbcTemplate.queryForObject(UserQuery.SQL_USER_FIND_EMAIL, userRowMapper, email);
         } catch (Exception e) {
-            throw new CustomAuthException("Invalid email and password");
+            throw new CustomAuthException(e.getMessage());
         }
     }
 
@@ -81,19 +76,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public String findEmailAndChangePassword(String email, String password) {
-        String message;
-        int data = jdbcTemplate.update(UserQuery.SQL_FIND_EMAIL_AND_CHANGE_PASSWORD, password, email);
-        if (data > 0) {
-            message = "Şifrə dəyişdirildi.";
-        } else {
-            message = "Səhv email";
-        }
-        return message;
-
+    public int findEmailAndChangePassword(String email, String password) {
+        return jdbcTemplate.update(UserQuery.SQL_FIND_EMAIL_AND_CHANGE_PASSWORD, password, email);
     }
 
-    public RowMapper<User> userRowMapper = (((resultSet, i) -> {
+    private final RowMapper<User> userRowMapper = (((resultSet, i) -> {
         return new User(resultSet.getInt("id"),
                 resultSet.getString("username"),
                 resultSet.getString("email"),

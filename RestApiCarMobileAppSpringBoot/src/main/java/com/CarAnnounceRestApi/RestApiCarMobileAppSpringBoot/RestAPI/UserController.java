@@ -27,35 +27,18 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<Map<String,String>> register(@RequestBody Map<String, String> userMap){
-       String username = userMap.get("username");
-       String password = userMap.get("password");
-       String email = userMap.get("email");
-       String phone = userMap.get("phone");
-       int cityId = Integer.parseInt(userMap.get("city_id"));
-       User user = userService.register(username,email,password,phone,cityId);
-       Map<String,String> map = new HashMap<>();
-       map.put("message","Təşekkurlər Qeydiyyatdan kecdiniz.");
-       return new ResponseEntity<>(map, HttpStatus.OK);
+       return new ResponseEntity<>(userService.register(userMap),HttpStatus.OK);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<Map<String,String>> login(@RequestBody Map<String,String> userMap){
-        String email = userMap.get("email");
-        String password =userMap.get("password");
-        User user  = userService.validate(email,password);
-        Map<String,String> map = new HashMap<>();
-        map.put("message", user.getUsername().toUpperCase() + " xoş gəldin.");
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        return new ResponseEntity<>(userService.validate(userMap),HttpStatus.OK);
     }
 
     @PostMapping("/changePassword")
     public ResponseEntity<Map<String,String>> changePassword(@RequestBody Map<String,String> userMap)  {
-        String email = userMap.get("email");
-        String password = userMap.get("password");
-        String message = userService.findEmailChangePassword(email,password);
-        Map<String,String> map = new HashMap<>();
-        map.put("message",message);
-        return  new ResponseEntity<>(map,HttpStatus.OK);
+        return  new ResponseEntity<>(userService.findEmailChangePassword(userMap),HttpStatus.OK);
 
     }
     

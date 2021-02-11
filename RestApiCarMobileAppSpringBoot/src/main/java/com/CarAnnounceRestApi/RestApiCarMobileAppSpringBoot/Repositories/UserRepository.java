@@ -13,6 +13,6 @@ public interface UserRepository {
 
     User findById(Integer Id);
 
-    String findEmailAndChangePassword(String email,String password);
+    int findEmailAndChangePassword(String email,String password);
 
 }
