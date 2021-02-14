@@ -5,6 +5,10 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Comment;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CommentService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,28 +27,44 @@ public class CommentController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<CommentDTO>> getAllListComment() {
-        return new ResponseEntity<>(commentService.getAll(),HttpStatus.OK);
+    @Cacheable(cacheNames = "AllCommentCache")
+    public List<CommentDTO> getAllListComment() {
+        return commentService.getAll();
     }
 
     @GetMapping("/{commentId}")
-    public ResponseEntity<CommentDTO> findByIdComment(@PathVariable("commentId") int commentId){
-        return new ResponseEntity<>(commentService.findById(commentId),HttpStatus.OK);
+    @Cacheable(cacheNames = "CommentCache")
+    public CommentDTO findByIdComment(@PathVariable("commentId") int commentId){
+        return commentService.findById(commentId);
     }
 
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createdNewComment(@RequestBody CommentDTO commentDTO){
-           return  new ResponseEntity<>(commentService.add(commentDTO),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "CommentCache", key = "#commentDTO.id")},
+            evict = {@CacheEvict(cacheNames = "AllCommentCache",allEntries = true)}
+    )
+    public Map<String,String> createdNewComment(@RequestBody CommentDTO commentDTO){
+           return commentService.add(commentDTO);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updateComment(@RequestBody CommentDTO commentDTO){
-        return  new ResponseEntity<>(commentService.findUserAndAnnouncement(commentDTO),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "CommentCache", key = "#commentDTO.id")},
+            evict = {@CacheEvict(cacheNames = "AllCommentCache",allEntries = true)}
+    )
+    public Map<String,String> updateComment(@RequestBody CommentDTO commentDTO){
+        return  commentService.findUserAndAnnouncement(commentDTO);
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Map<String,String>> deletedComment(@PathVariable("commentId") int commentId){
-        return  new ResponseEntity<>(commentService.delete(commentId),HttpStatus.OK);
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "CommentCache",key = "#id"),
+                    @CacheEvict(cacheNames = "AllCommentCache",allEntries = true)
+            }
+    )
+    public Map<String,String> deletedComment(@PathVariable("commentId") int commentId){
+        return  commentService.delete(commentId);
     }
 
 }

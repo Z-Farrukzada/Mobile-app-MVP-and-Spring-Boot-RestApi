@@ -2,10 +2,11 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Locale;
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
     private int Id;
     private String username;

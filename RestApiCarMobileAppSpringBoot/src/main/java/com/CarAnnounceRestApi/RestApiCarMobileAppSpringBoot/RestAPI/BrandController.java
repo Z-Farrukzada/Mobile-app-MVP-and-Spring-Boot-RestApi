@@ -9,6 +9,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
@@ -32,37 +36,54 @@ public class BrandController {
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Map<String,Object>>> allListBrand() throws IOException {
+    @Cacheable(cacheNames = "AllBrandCache")
+    public List<Map<String,Object>> allListBrand() throws IOException {
         return brandList(brandServices.getAll());
     }
 
     @GetMapping(value = "/popList",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Map<String,Object>>> popListBrand() throws IOException {
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(brandServices.popularBrand());
+    @Cacheable(cacheNames = "AllBrandPopCache")
+    public List<Map<String,Object>> popListBrand() throws IOException {
+        return brandServices.popularBrand();
     }
 
     @GetMapping("/{brandId}")
-    public ResponseEntity<BrandDTO> findByIdBrand(@PathVariable("brandId") int brandId){
-         return  new ResponseEntity<>(brandServices.findById(brandId),HttpStatus.OK);
+    @Cacheable(cacheNames = "BrandCache")
+    public BrandDTO findByIdBrand(@PathVariable("brandId") int brandId){
+         return  brandServices.findById(brandId);
     }
 
     @PostMapping("/createBrand")
-    public ResponseEntity<Map<String,String>> addBrand(@RequestBody BrandDTO brandDto){
-        return  new ResponseEntity<>(brandServices.add(brandDto),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "BrandCache", key = "#brandDto.id")	},
+            evict = {@CacheEvict(cacheNames = "AllBrandCache",allEntries = true),
+                    @CacheEvict(cacheNames = "AllBrandPopCache",allEntries = true)}
+    )
+    public Map<String,String> addBrand(@RequestBody BrandDTO brandDto){
+        return  brandServices.add(brandDto);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updatedBrand(@RequestBody BrandDTO brandDTO){
-        return  new ResponseEntity<>(brandServices.update(brandDTO),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "BrandCache", key = "#brandDto.id")	},
+            evict = {@CacheEvict(cacheNames = "AllBrandCache",allEntries = true),
+                    @CacheEvict(cacheNames = "AllBrandPopCache",allEntries = true)}
+    )
+    public Map<String,String> updatedBrand(@RequestBody BrandDTO brandDTO){
+        return  brandServices.update(brandDTO);
     }
 
     @DeleteMapping("/{brandId}")
-    public ResponseEntity<Map<String,String>> deletedBrand(@PathVariable("brandId") int brandId){
-        return  new ResponseEntity<>(brandServices.delete(brandId),HttpStatus.OK);
+    @Caching(
+            evict = {@CacheEvict(cacheNames = "AllBrandCache",allEntries = true),
+                    @CacheEvict(cacheNames = "AllBrandPopCache",allEntries = true)}
+    )
+    public Map<String,String> deletedBrand(@PathVariable("brandId") int brandId){
+        return  brandServices.delete(brandId);
     }
 
 
-    private ResponseEntity<List<Map<String,Object>>> brandList(List<BrandDTO> popularBrand) throws IOException {
+    private List<Map<String,Object>> brandList(List<BrandDTO> popularBrand) throws IOException {
         List<Map<String,Object>> newdata = new ArrayList<>();
         for(BrandDTO carBrand:popularBrand){
             Map<String,Object> map = new HashMap<>();
@@ -71,7 +92,7 @@ public class BrandController {
             map.put("logoImage", Convert.ConvertBase64(carBrand.getLogoImage()));
             newdata.add(map);
         }
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(newdata);
+        return newdata;
     }
 
 }

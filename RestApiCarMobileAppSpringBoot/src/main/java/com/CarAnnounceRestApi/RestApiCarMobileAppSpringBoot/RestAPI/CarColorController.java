@@ -5,6 +5,10 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CarColorsService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,29 +24,52 @@ public class CarColorController {
     @Autowired
     CarColorsService carColorsService;
 
+
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<ColorDTO>> allListColors(){
-         return  new ResponseEntity<>(carColorsService.getAll(),HttpStatus.OK);
+    @Cacheable(cacheNames = "AllColorCache")
+    public List<ColorDTO> allListColors(){
+         return  carColorsService.getAll();
     }
+
 
     @GetMapping("/{colorId}")
-    public ResponseEntity<ColorDTO> findByIdColor(@PathVariable("colorId") int colorId){
-        return  new ResponseEntity<>(carColorsService.findById(colorId),HttpStatus.OK);
+    @Cacheable(cacheNames = "ColorCache")
+    public ColorDTO findByIdColor(@PathVariable("colorId") int colorId){
+        return  carColorsService.findById(colorId);
     }
+
 
     @PostMapping("/createdColor")
-    public ResponseEntity<Map<String,String>> createNewColor(@RequestBody ColorDTO colorDTO){
-            return new ResponseEntity<>(carColorsService.add(colorDTO),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "ColorCache", key = "#colorDTO.id")	},
+            evict = {@CacheEvict(cacheNames = "AllColorCache",allEntries = true)}
+    )
+    public Map<String,String> createNewColor(@RequestBody ColorDTO colorDTO){
+            return carColorsService.add(colorDTO);
     }
+
+
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>>  updateColor(@RequestBody ColorDTO colorDTO){
-        return new ResponseEntity<>(carColorsService.update(colorDTO),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "ColorCache", key = "#colorDTO.id")	},
+            evict = {@CacheEvict(cacheNames = "AllColorCache",allEntries = true)}
+    )
+    public Map<String,String>  updateColor(@RequestBody ColorDTO colorDTO){
+        return carColorsService.update(colorDTO) ;
     }
 
+
+
     @DeleteMapping("{colorId}")
-    public ResponseEntity<Map<String,String>> deleteColor(@PathVariable("colorId") int id){
-        return  new ResponseEntity<>(carColorsService.delete(id),HttpStatus.OK);
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "ColorCache",key = "#id"),
+                    @CacheEvict(cacheNames = "AllColorCache",allEntries = true)
+            }
+    )
+    public Map<String,String> deleteColor(@PathVariable("colorId") int id){
+        return  carColorsService.delete(id);
     }
 }

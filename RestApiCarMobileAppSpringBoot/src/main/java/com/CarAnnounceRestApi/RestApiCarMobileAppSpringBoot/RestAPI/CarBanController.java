@@ -5,6 +5,10 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CarBanService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,28 +28,44 @@ public class CarBanController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<BanDTO>> allListCarBans(){
-        return new ResponseEntity<>(carBanService.getAll(),HttpStatus.OK);
+    @Cacheable(cacheNames = "AllBanCache")
+    public List<BanDTO> allListCarBans(){
+        return carBanService.getAll();
     }
 
     @GetMapping("/{banId}")
-    public ResponseEntity<BanDTO> findByIdCarBan(@PathVariable("banId") int id){
-        return  new ResponseEntity<>( carBanService.findById(id),HttpStatus.OK);
+    @Cacheable(cacheNames = "BanCache")
+    public BanDTO findByIdCarBan(@PathVariable("banId") int id){
+        return  carBanService.findById(id);
     }
 
     @PostMapping("/createdBan")
-    public ResponseEntity<Map<String,String>> createNewBan(@RequestBody BanDTO banDTO){
-        return new ResponseEntity<>(carBanService.add(banDTO),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "BanCache", key = "#banDTO.id")	},
+            evict = {@CacheEvict(cacheNames = "AllBanCache",allEntries = true)}
+    )
+    public Map<String,String> createNewBan(@RequestBody BanDTO banDTO){
+        return carBanService.add(banDTO);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>>  updateColor(@RequestBody BanDTO banDTO){
-        return new ResponseEntity<>( carBanService.update(banDTO),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "BanCache", key = "#banDTO.id")	},
+            evict = {@CacheEvict(cacheNames = "AllBanCache",allEntries = true)}
+    )
+    public Map<String,String> updateColor(@RequestBody BanDTO banDTO){
+        return carBanService.update(banDTO);
     }
 
     @DeleteMapping("{banId}")
-    public ResponseEntity<Map<String,String>> deleteColor(@PathVariable("banId") int id){
-        return  new ResponseEntity<>(carBanService.delete(id),HttpStatus.OK);
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "BanCache",key = "#id"),
+                    @CacheEvict(cacheNames = "AllBanCache",allEntries = true)
+            }
+    )
+    public Map<String,String> deleteColor(@PathVariable("banId") int id){
+        return  carBanService.delete(id);
     }
 
 

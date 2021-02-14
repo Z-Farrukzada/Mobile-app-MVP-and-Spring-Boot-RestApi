@@ -5,6 +5,10 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarDetail;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.DetailService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,27 +26,46 @@ public class DetailController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<DetailDTO>> allListCarDetail(){
-        return new ResponseEntity<>(detailService.getAll(),HttpStatus.OK);
+    @Cacheable(cacheNames = "AllDetailCache")
+    public List<DetailDTO> allListCarDetail(){
+        return detailService.getAll();
     }
+
 
     @GetMapping("{detailId}")
-    public ResponseEntity<DetailDTO> findByIdDetail(@PathVariable("detailId") int detailId){
-        return  new ResponseEntity<>(detailService.findById(detailId),HttpStatus.OK);
+    @Cacheable(cacheNames = "DetailCache")
+    public DetailDTO findByIdDetail(@PathVariable("detailId") int detailId){
+        return  detailService.findById(detailId);
     }
 
+
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createdNewDetails(@RequestBody DetailDTO detailDTO){
-        return new ResponseEntity<>(detailService.add(detailDTO),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "DetailCache", key = "#detailDTO.id")},
+            evict = {@CacheEvict(cacheNames = "AllDetailCache",allEntries = true)}
+    )
+    public  Map<String,String> createdNewDetails(@RequestBody DetailDTO detailDTO){
+        return detailService.add(detailDTO);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>> updatedDetail(@RequestBody DetailDTO detailDTO){
-        return  new ResponseEntity<>(detailService.update(detailDTO),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "DetailCache", key = "#detailDTO.id")},
+            evict = {@CacheEvict(cacheNames = "AllDetailCache",allEntries = true)}
+    )
+    public Map<String,String> updatedDetail(@RequestBody DetailDTO detailDTO){
+        return  detailService.update(detailDTO);
     }
 
+
     @DeleteMapping("{detailId}")
-    public ResponseEntity<Map<String,String>> deletedDetail(@PathVariable("detailId") int detailId){
-        return new ResponseEntity<>(detailService.delete(detailId),HttpStatus.OK);
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "DetailCache",key = "#detailId"),
+                    @CacheEvict(cacheNames = "AllDetailCache",allEntries = true)
+            }
+    )
+    public  Map<String,String> deletedDetail(@PathVariable("detailId") int detailId){
+        return  detailService.delete(detailId);
     }
 }

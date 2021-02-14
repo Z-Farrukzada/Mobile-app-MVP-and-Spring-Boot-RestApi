@@ -1,11 +1,13 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain;
 import lombok.*;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public  class CarAnnouncement {
+public  class CarAnnouncement implements Serializable {
     private  int id;
     private  int walk;
     private  int price;

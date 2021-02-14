@@ -6,6 +6,10 @@ import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Exchanges;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.ExchangeService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,28 +28,44 @@ public class ExchangesController {
 
     @SneakyThrows
     @GetMapping
-    public ResponseEntity<List<ExchangesDTO>> allListExchanges() {
-        return new ResponseEntity<>(exchangeService.getAll(), HttpStatus.OK);
+    @Cacheable(cacheNames = "AllExchangeCache")
+    public  List<ExchangesDTO> allListExchanges() {
+        return exchangeService.getAll();
     }
 
     @GetMapping("/{exchangeId}")
-    public ResponseEntity<ExchangesDTO> findByIdExchange(@PathVariable("exchangeId") int exchangeId){
-        return  new ResponseEntity<>(exchangeService.findById(exchangeId),HttpStatus.OK);
+    @Cacheable(cacheNames = "ExchangeCache")
+    public  ExchangesDTO findByIdExchange(@PathVariable("exchangeId") int exchangeId){
+        return  exchangeService.findById(exchangeId);
     }
 
     @PostMapping("/created")
-    public ResponseEntity<Map<String,String>> createNewExchange(@RequestBody ExchangesDTO exchangesDto){
-        return new ResponseEntity<>(exchangeService.add(exchangesDto),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "ExchangeCache", key = "#exchangesDto.id")},
+            evict = {@CacheEvict(cacheNames = "AllExchangeCache",allEntries = true)}
+    )
+    public Map<String,String> createNewExchange(@RequestBody ExchangesDTO exchangesDto){
+        return  exchangeService.add(exchangesDto);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>>  updateExchange(@RequestBody ExchangesDTO exchangesDto){
-        return new ResponseEntity<>(exchangeService.update(exchangesDto),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "ExchangeCache", key = "#exchangesDto.id")},
+            evict = {@CacheEvict(cacheNames = "AllExchangeCache",allEntries = true)}
+    )
+    public  Map<String,String>  updateExchange(@RequestBody ExchangesDTO exchangesDto){
+        return  exchangeService.update(exchangesDto);
     }
 
     @DeleteMapping("/{exchangeId}")
-    public ResponseEntity<Map<String,String>> deleteExchange(@PathVariable("exchangeId") int exchangeId){
-        return  new ResponseEntity<>(exchangeService.delete(exchangeId),HttpStatus.OK);
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "ExchangeCache",key = "#exchangeId"),
+                    @CacheEvict(cacheNames = "AllExchangeCache",allEntries = true)
+            }
+    )
+    public Map<String,String> deleteExchange(@PathVariable("exchangeId") int exchangeId){
+        return  exchangeService.delete(exchangeId);
     }
 
 }

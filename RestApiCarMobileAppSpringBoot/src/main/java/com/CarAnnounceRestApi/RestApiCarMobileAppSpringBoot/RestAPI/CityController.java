@@ -1,17 +1,13 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
-
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.CityDTO;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.City;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CarColorsService;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.CityService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,33 +20,52 @@ public class CityController {
 
     @SneakyThrows
     @GetMapping("/all")
-    public ResponseEntity<List<CityDTO>> allListCity(){
-        return  new ResponseEntity<>(cityService.getAll(),HttpStatus.OK);
+    @Cacheable(cacheNames = "AllCityCache")
+    public List<CityDTO> allListCity(){
+        return  cityService.getAll();
     }
 
     @GetMapping("/{cityId}")
-    public ResponseEntity<CityDTO> findByIdCity(@PathVariable("cityId") int cityId){
-        return  new ResponseEntity<>(cityService.findById(cityId),HttpStatus.OK);
+    @Cacheable(cacheNames = "CityCache")
+    public CityDTO findByIdCity(@PathVariable("cityId") int cityId){
+        return  cityService.findById(cityId);
     }
 
     @GetMapping("name/{cityName}")
-    public ResponseEntity<Long> WithNameFindId(@PathVariable("cityName") String cityName){
-       return  new ResponseEntity<>(cityService.WithNameFindCityId(cityName),HttpStatus.OK);
+    @Cacheable(cacheNames = "CityNameCache")
+    public Long WithNameFindId(@PathVariable("cityName") String cityName){
+       return  cityService.WithNameFindCityId(cityName);
     }
 
     @PostMapping("/createdCity")
-    public ResponseEntity<Map<String,String>> createNewCity(@RequestBody CityDTO cityDTO){
-        return new ResponseEntity<>(cityService.add(cityDTO),HttpStatus.CREATED);
+    @Caching(
+            put= {@CachePut(cacheNames = "CityCache", key = "#cityDTO.id"),
+                    @CachePut(cacheNames ="CityNameCache" ,key = "#cityDTO.name")},
+            evict = {@CacheEvict(cacheNames = "AllCityCache",allEntries = true)}
+    )
+    public Map<String,String> createNewCity(@RequestBody CityDTO cityDTO){
+        return cityService.add(cityDTO);
     }
 
     @PutMapping("/updated")
-    public ResponseEntity<Map<String,String>>  updateCity(@RequestBody CityDTO cityDTO){
-        return new ResponseEntity<>(cityService.update(cityDTO),HttpStatus.OK);
+    @Caching(
+            put= {@CachePut(cacheNames = "CityCache", key = "#cityDTO.id"),
+                    @CachePut(cacheNames ="CityNameCache" ,key = "#cityDTO.name")},
+            evict = {@CacheEvict(cacheNames = "AllCityCache",allEntries = true)}
+    )
+    public Map<String,String> updateCity(@RequestBody CityDTO cityDTO){
+        return cityService.update(cityDTO);
     }
 
     @DeleteMapping("{cityId}")
-    public ResponseEntity<Map<String,String>> deleteCity(@PathVariable("cityId") int id){
-        return  new ResponseEntity<>(cityService.delete(id),HttpStatus.OK);
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "CityCache",key = "#id"),
+                    @CacheEvict(cacheNames = "AllCityCache",allEntries = true)
+            }
+    )
+    public Map<String,String> deleteCity(@PathVariable("cityId") int id){
+        return  cityService.delete(id);
     }
 
 
