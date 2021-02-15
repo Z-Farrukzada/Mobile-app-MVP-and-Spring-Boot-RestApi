@@ -1,22 +1,19 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services;
 
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.ColorDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.ModelDTO;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarModel;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories.ModelRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @Transactional
 public class ModelServiceImpl implements  ModelService{
@@ -26,65 +23,65 @@ public class ModelServiceImpl implements  ModelService{
 
     @Override
     public List<ModelDTO> getAll() {
+        log.debug("Butun Modeller cagirilir...");
         List<ModelDTO> modelDto = new ArrayList<>();
         for (CarModel model : modelRepository.getAll()) {
             modelDto.add(ModelDTO.builder().id(model.getId()).name(model.getName()).brandId(model.getBrandId()).build());
         }
+        log.debug("Butun Modeller  " + modelDto);
         return modelDto;
     }
 
     @Override
     public ModelDTO findById(int id) {
+        log.debug("Model id-ye gore axtarilir...");
         CarModel model = modelRepository.findById(id);
+        log.debug("Model " + model);
         return ModelDTO.builder().id(model.getId()).name(model.getName()).brandId(model.getBrandId()).build();
     }
 
     @Override
-    public Map<String,String> add(ModelDTO entity) throws CustomBadRequest {
+    public Map<String,String> add(ModelDTO entity) {
+        log.debug("Yeni Model elave olunur...");
         Map<String,String> map = new HashMap<>();
-        try {
             modelRepository.add(addModel(entity));
             map.put("Message","Yeni Model yaradildi");
-        }catch (Exception e){
-            map.put("Message", String.valueOf(new CustomBadRequest("Yeni Model yaradilmadi")));
-        }
         return map;
     }
 
     @Override
-    public Map<String,String> update(ModelDTO entity)  throws CustomBadRequest{
+    public Map<String,String> update(ModelDTO entity){
+        log.debug("Model deyisdirilir...");
         Map<String,String> map = new HashMap<>();
-        try {
             modelRepository.update(addModel(entity));
             map.put("Message","Model deyisidirldi");
-        }catch (Exception e){
-            map.put("Message", String.valueOf(new CustomBadRequest("Model deyisdirilmedi")));
-        }
+        log.debug(map.get("Message"));
         return map;
     }
 
     @Override
     public  Map<String,String> delete(int id) {
+        log.debug("Model silinir...");
         Map<String,String> map = new HashMap<>();
-        try{
             modelRepository.delete(id);
             map.put("Message","Model silindi");
-        }catch (Exception e){
-            map.put("Message", String.valueOf(new CustomBadRequest("Model silinmedi")));
-        }
+        log.debug(map.get("Message"));
         return map;
     }
 
     @Override
     public  List<ModelDTO> FindByModelByBrandId(int id) {
+        log.debug("Model Marka ile birlikde cagirilir...");
         List<ModelDTO> modelDto = new ArrayList<>();
         for (CarModel model : modelRepository.FindModelByBrand(id)) {
             modelDto.add(ModelDTO.builder().id(model.getId()).name(model.getName()).brandId(model.getBrandId()).build());
         }
+        log.debug("Model Marka ile birlikde " + modelDto);
         return modelDto;
     }
 
     public CarModel addModel(ModelDTO modelDTO){
+        log.debug("ModelDTO CarModel-e elave olunur...");
         CarModel carModel =null;
         if(modelDTO.getName() != null && modelDTO.getBrandId()!= 0){
             carModel = CarModel.builder()
@@ -93,6 +90,7 @@ public class ModelServiceImpl implements  ModelService{
                     .brandId(modelDTO.getBrandId())
                     .build();
         }
+        log.debug("ModelDTO CarModel-e elave elave olundu " + carModel);
         return carModel;
     }
 

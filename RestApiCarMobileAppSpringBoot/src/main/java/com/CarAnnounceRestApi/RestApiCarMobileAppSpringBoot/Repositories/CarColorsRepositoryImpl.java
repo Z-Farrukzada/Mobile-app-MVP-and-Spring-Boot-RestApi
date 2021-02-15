@@ -2,14 +2,12 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.CarColorsQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarColors;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.management.Query;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -26,12 +24,12 @@ public class CarColorsRepositoryImpl implements CarColorsRepository{
     }
 
     @Override
-    public CarColors findById(int id) throws CustomNotFoundException {
+    public CarColors findById(int id) {
         return  jdbcTemplate.queryForObject(CarColorsQuery.SQL_FIND_BY_ID_COLOR,carColorsRowMapper,id);
     }
 
     @Override
-    public void add(CarColors entity) throws CustomBadRequest {
+    public void add(CarColors entity) {
           jdbcTemplate.update(connection -> {
               PreparedStatement ps = connection.prepareStatement(CarColorsQuery.SQL_CREATED_COLOR, Statement.RETURN_GENERATED_KEYS);
               ps.setString(1,entity.getName());
@@ -40,12 +38,12 @@ public class CarColorsRepositoryImpl implements CarColorsRepository{
     }
 
     @Override
-    public void update(CarColors entity) throws CustomBadRequest {
+    public void update(CarColors entity){
             jdbcTemplate.update(CarColorsQuery.SQL_UPDATED_COLOR,entity.getName(),entity.getId());
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
+    public void delete(int id){
               jdbcTemplate.update(CarColorsQuery.SQL_DELETED_COLOR,id);
     }
 

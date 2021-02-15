@@ -1,8 +1,5 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services;
 
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.User;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomAuthException;
-
 import java.util.Map;
 
 public interface UserService {

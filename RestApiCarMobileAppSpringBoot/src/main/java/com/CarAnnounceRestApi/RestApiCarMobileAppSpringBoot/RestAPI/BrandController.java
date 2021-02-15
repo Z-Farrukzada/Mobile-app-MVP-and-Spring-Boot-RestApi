@@ -1,31 +1,17 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.RestAPI;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Base64.Convert;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.BrandDTO;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrand;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrandWithModelCount;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services.BrandServices;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
-
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
+
 
 @RestController
 @RequestMapping("api/brands")

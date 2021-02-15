@@ -1,12 +1,9 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services;
 
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.BanDTO;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO.CommentDTO;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBan;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Comment;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories.CommentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @Transactional
 public class CommentServiceImpl  implements  CommentService{
@@ -25,6 +23,7 @@ public class CommentServiceImpl  implements  CommentService{
 
     @Override
     public List<CommentDTO> getAll() {
+        log.debug("Butun şərhlər axtarilir...");
         List<CommentDTO> commentDto = new ArrayList<>();
         for (Comment comment : commentRepository.getAll()) {
             commentDto.add(CommentDTO.builder()
@@ -35,12 +34,15 @@ public class CommentServiceImpl  implements  CommentService{
                     .announcementId(comment.getAnnouncementId())
                     .build());
         }
+        log.debug("Butun şərhlər " + commentDto);
         return commentDto;
     }
 
     @Override
         public CommentDTO findById(int id) {
+        log.debug("Şərh id-ye gore axtarilir...");
         Comment comment = commentRepository.findById(id);
+        log.debug("Şərh id-ye gore " + comment);
         return CommentDTO.builder()
                 .id(comment.getId())
                 .comment(comment.getComment())
@@ -51,55 +53,52 @@ public class CommentServiceImpl  implements  CommentService{
     }
 
     @Override
-    public Map<String,String> add(CommentDTO entity) throws CustomBadRequest {
+    public Map<String,String> add(CommentDTO entity) {
+            log.debug("Şərh elave olunur...");
         Map<String,String> map = new HashMap<>();
-        try{
             commentRepository.add(addComment(entity));
             map.put("Message","Şərh əlavə olundu");
-        }catch (Exception e){
-            map.put("Message", String.valueOf(new CustomBadRequest("Şərh əlavə olunmadi")));
-        }
+            log.debug("Şərh elave olundu");
         return map;
     }
 
     @Override
-    public Map<String,String> update(CommentDTO entity) throws CustomBadRequest {
+    public Map<String,String> update(CommentDTO entity) {
+        log.debug("Şərh deyisdirilir...");
         Map<String,String> map = new HashMap<>();
-        try{
             commentRepository.update(addComment(entity));
             map.put("Message","Şərh deyisdirildi");
-        }catch (Exception e){
-            map.put("Message", String.valueOf(new CustomBadRequest("Şərh deyisdirlmedi !!!")));
-        }
+        log.debug("Şərh deyisdirildi");
         return map;
     }
 
     @Override
     public  Map<String,String> delete(int id) {
+        log.debug("Şərh silinir...");
         Map<String,String> map = new HashMap<>();
-        try{
             commentRepository.delete(id);
-            map.put("Message","Serh silindi");
-        }catch (Exception e){
-            map.put("Message", String.valueOf(new CustomBadRequest("Serh silinmedi !!!")));
-        }
+            map.put("Message","Şərh silindi");
+        log.debug(map.get("Message"));
         return map;
     }
 
     @Override
-    public Map<String,String> findUserAndAnnouncement(CommentDTO commentDto) throws CustomBadRequest {
+    public Map<String,String> findUserAndAnnouncement(CommentDTO commentDto){
+        log.debug("Istifadeci serhi deyisdirir...");
         Map<String,String> map = new HashMap<>();
           boolean isExist = commentRepository.isFindUserAndAnnounce(addComment(commentDto));
         if(isExist){
             commentRepository.update(addComment(commentDto));
-            map.put("Message"," Serh deyisdirildi");
+            map.put("Message","Istifadeci Serhi deyisdirildi");
         }else{
-            map.put("Message", String.valueOf(new CustomBadRequest("Bu serh sizin deyil")));
+            map.put("Message", "Istifadeci Serhi deyisdirilmedi");
         }
+        log.debug(map.get("Message"));
         return map;
     }
 
     public Comment addComment(CommentDTO commentDTO){
+        log.debug("CommentDTO Comment-e elave olunur...");
         Comment comment =null;
         if(commentDTO.getComment() != null
                 && commentDTO.getAnnouncementId() != 0 && commentDTO.getUserId() != 0 && commentDTO.getWritetime() != null){
@@ -111,6 +110,7 @@ public class CommentServiceImpl  implements  CommentService{
                     .announcementId(commentDTO.getAnnouncementId())
                     .build();
         }
+        log.debug("CommentDTO Comment-e elave olundu " +comment);
         return comment;
     }
 

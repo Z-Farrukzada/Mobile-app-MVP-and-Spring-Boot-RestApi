@@ -2,9 +2,6 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.FuelQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarFuelType;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.Exchanges;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

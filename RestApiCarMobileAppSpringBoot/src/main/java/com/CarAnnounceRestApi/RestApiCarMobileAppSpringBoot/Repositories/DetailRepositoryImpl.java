@@ -2,7 +2,6 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.DetailQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarDetail;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,12 +24,12 @@ public class DetailRepositoryImpl implements  DetailsRepository{
     }
 
     @Override
-    public CarDetail findById(int id) throws CustomNotFoundException {
+    public CarDetail findById(int id)  {
             return jdbcTemplate.queryForObject(DetailQuery.SQL_FIND_By_ID,carDetailRowMapper,id);
     }
 
     @Override
-    public void add(CarDetail entity) throws CustomBadRequest {
+    public void add(CarDetail entity)  {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(DetailQuery.SQL_CREATED_DETAIL, Statement.RETURN_GENERATED_KEYS);
             ps.setBoolean(1, entity.isHatch());
@@ -41,12 +40,12 @@ public class DetailRepositoryImpl implements  DetailsRepository{
     }
 
     @Override
-    public void update(CarDetail entity) throws CustomBadRequest {
+    public void update(CarDetail entity)  {
             jdbcTemplate.update(DetailQuery.SQL_UPDATED_DETAIL,entity.isHatch(),entity.isABS(),entity.isAircondition(),entity.getId());
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
+    public void delete(int id)  {
             jdbcTemplate.update(DetailQuery.SQL_DELETED_DETAIL,id);
     }
 

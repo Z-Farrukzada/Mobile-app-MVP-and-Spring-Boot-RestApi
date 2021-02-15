@@ -1,9 +1,5 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories.BaseRepository;
 
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrand;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
-
 import java.util.List;
 
 public interface IBaseRepository<T>{

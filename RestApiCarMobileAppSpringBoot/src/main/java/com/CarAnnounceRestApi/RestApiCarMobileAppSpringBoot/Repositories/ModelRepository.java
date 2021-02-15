@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ModelRepository  extends IBaseRepository<CarModel> {
 
-   List<CarModel> FindModelByBrand(int id) throws CustomNotFoundException;
+   List<CarModel> FindModelByBrand(int id) ;
 
 }

@@ -3,7 +3,6 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.CityQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.City;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,12 +25,12 @@ public class CityRepositoryImpl implements CityRepository{
     }
 
     @Override
-    public City findById(int id) throws CustomNotFoundException {
+    public City findById(int id){
             return  jdbcTemplate.queryForObject(CityQuery.SQL_FIND_BY_ID_CITY,cityRowMapper,id);
     }
 
     @Override
-    public void add(City entity) throws CustomBadRequest {
+    public void add(City entity)  {
            jdbcTemplate.update(connection -> {
                PreparedStatement ps = connection.prepareStatement(CityQuery.SQL_CREATED_CITY, Statement.NO_GENERATED_KEYS);
                ps.setString(1,entity.getName());
@@ -41,16 +40,17 @@ public class CityRepositoryImpl implements CityRepository{
     }
 
     @Override
-    public void update(City entity) throws CustomBadRequest {
+    public void update(City entity){
             jdbcTemplate.update(CityQuery.SQL_UPDATED_CITY,entity.getName(),entity.getId());
     }
 
     @Override
-    public void delete(int id) throws CustomNotFoundException {
+    public void delete(int id) {
             jdbcTemplate.update(CityQuery.SQL_DELETED_CITY,id);
     }
+
     @Override
-    public Long WithNameFindId(String cityName) throws CustomNotFoundException {
+    public Long WithNameFindId(String cityName){
             return  jdbcTemplate.queryForObject(CityQuery.SQL_WITH_NAME_FIND_ID,Long.class,cityName);
     }
 

@@ -1,10 +1,9 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Services;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.User;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomAuthException;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 @Transactional
 public class UserServiceImpl implements  UserService{
@@ -21,24 +21,22 @@ public class UserServiceImpl implements  UserService{
 
     @Override
     public  Map<String,String> register(Map<String, String> userMap) {
+        log.debug("Istifadeci qeydiyyatdan kecir...");
         Map<String,String> map = new HashMap<>();
-        try {
             String username = userMap.get("username");
             String password = userMap.get("password");
             String email = userMap.get("email");
             String phone = userMap.get("phone");
             int cityId = Integer.parseInt(userMap.get("city_id"));
             map = checkData(username,password,email,phone,cityId);
-        }catch (Exception e){
-            map.put("message",e.getMessage().toString());
-        }
+            log.debug(map.get("message"));
         return  map;
     }
 
     @Override
     public Map<String,String> validate(Map<String,String> userMap) {
+        log.debug("Istifadeci sisteme daxil olur..");
         Map<String,String> map = new HashMap<>();
-        try {
             String email = userMap.get("email");
             String password =userMap.get("password");
             User user = userRepository.findEmailAndPassword(email,password);
@@ -47,14 +45,13 @@ public class UserServiceImpl implements  UserService{
             }else{
                 map.put("message", user.getUsername().toUpperCase() + " xoş gəldin.");
             }
-        }catch (Exception e){
-            map.put("message","Zəhmət olmasa bir daha daxil edin.");
-        }
+        log.debug(map.get("message"));
         return map;
     }
 
     @Override
     public Map<String,String> findEmailChangePassword(Map<String,String> userMap) {
+        log.debug("Email axtarilir...");
         Map<String,String> map = new HashMap<>();
         String email = userMap.get("email");
         String password = userMap.get("password");
@@ -64,6 +61,7 @@ public class UserServiceImpl implements  UserService{
         } else {
             map.put("message","Səhv email");
         }
+        log.debug(map.get("message"));
         return map;
     }
 

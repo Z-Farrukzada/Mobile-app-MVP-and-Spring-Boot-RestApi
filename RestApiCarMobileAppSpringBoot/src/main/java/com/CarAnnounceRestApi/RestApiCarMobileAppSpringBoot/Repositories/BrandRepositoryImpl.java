@@ -3,8 +3,6 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.BrandQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrand;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.CarBrandWithModelCount;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomBadRequest;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

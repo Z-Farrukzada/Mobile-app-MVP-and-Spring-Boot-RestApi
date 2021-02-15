@@ -1,13 +1,12 @@
 package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.User;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomAuthException;
 
 public interface UserRepository {
 
-    Integer create(String Username,String email,String password,String phone,int cityId) throws CustomAuthException;
+    Integer create(String Username,String email,String password,String phone,int cityId);
 
-    User findEmailAndPassword(String email, String password) throws  CustomAuthException;
+    User findEmailAndPassword(String email, String password);
 
     Long getCountByEmail(String email);
 

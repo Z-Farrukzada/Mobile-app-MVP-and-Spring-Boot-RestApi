@@ -2,8 +2,6 @@ package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Repositories;
 
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DbQueries.UserQuery;
 import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain.User;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomAuthException;
-import com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,7 +12,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public Integer create(String username, String email, String password, String phone, int cityId) throws CustomAuthException {
-        try {
+    public Integer create(String username, String email, String password, String phone, int cityId) {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(UserQuery.SQL_CREATE_USER, Statement.RETURN_GENERATED_KEYS);
@@ -40,39 +36,22 @@ public class UserRepositoryImpl implements UserRepository {
                 return ps;
             }, keyHolder);
             return (Integer) Objects.requireNonNull(keyHolder.getKeys()).get("ID");
-        } catch (Exception e) {
-            throw new CustomAuthException("MESSAGE" + e.getLocalizedMessage());
-        }
     }
 
     @Override
-    public User findEmailAndPassword(String email, String password) throws CustomAuthException {
-        try {
+    public User findEmailAndPassword(String email, String password)  {
             return jdbcTemplate.queryForObject(UserQuery.SQL_USER_FIND_EMAIL, userRowMapper, email);
-        } catch (Exception e) {
-            throw new CustomAuthException(e.getMessage());
-        }
     }
 
     @Override
     public Long getCountByEmail(String email) {
-        try {
             return jdbcTemplate.queryForObject(UserQuery.SQL_USER_FIND_EMAIL_COUNT, Long.class, email);
-
-        } catch (Exception e) {
-            throw new CustomAuthException(e.getMessage());
-        }
     }
 
     @Override
     public User findById(Integer Id) {
-        try {
             List<User> users = jdbcTemplate.query(UserQuery.SQL_USER_FIND_BY_ID, new BeanPropertyRowMapper<User>(User.class), Id);
             return DataAccessUtils.uniqueResult(users);
-        } catch (Exception e) {
-            throw new CustomAuthException(e.getLocalizedMessage());
-        }
-
     }
 
     @Override
