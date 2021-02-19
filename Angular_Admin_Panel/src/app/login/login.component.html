@@ -1,0 +1,20 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="login login__form">
+        <div class="container cont__login">
+            <input type="text" class="email input" name="name" (keyup)="change($event)" formControlName="userName"
+                placeholder="Username">
+
+            <input type="password" class="password input" name="password" (keyup)="change($event)"
+                formControlName="password" placeholder="Password">
+
+            <input type="submit" class="btn btn__login" (click)="Submit()">
+        </div>
+
+    </div>
+    <div class="cta">
+        <h2 class="cta__heading">Mobil Admin Panelə Xoş gəlmisiniz...</h2>
+        <p class="cta__text">Login in access in Mobile Admin Panel</p>
+    </div>
+</form>
