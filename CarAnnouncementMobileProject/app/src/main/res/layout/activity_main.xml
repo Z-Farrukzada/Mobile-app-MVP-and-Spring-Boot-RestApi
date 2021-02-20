@@ -34,18 +34,31 @@
 
 
          <include layout="@layout/brands"
+                  android:id="@+id/main_brands"
                   android:layout_below="@id/main_menu_toolbar"
                   android:layout_width="wrap_content"
+                  android:layout_alignParentStart="true"
+                  android:layout_alignParentEnd="true"
                   android:layout_height="wrap_content"/>
 
 
+    <include layout="@layout/slider"
+        android:id="@+id/slider"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/main_brands"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="200dp" />
+
+
     <include
+        android:id="@+id/bottom_nav"
         layout="@layout/bottom_navigation"
         android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_height="@dimen/height_small" />
+        android:layout_height="@dimen/height_medium" />
 
 </RelativeLayout>
 

@@ -1,9 +1,10 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.view.Activity.Home;
 
-import android.app.Activity;
-
 import com.zaurfarrukhzada.carannouncementmobileproject.interactors.MainInteract;
+import com.zaurfarrukhzada.carannouncementmobileproject.interactors.SliderInteract;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.SliderItem;
+
 
 import java.util.List;
 
@@ -11,10 +12,12 @@ public class MainActivityPresenter  implements IMainActivityContract.Presenter{
 
     IMainActivityContract.View mView;
     MainInteract mainInteract;
+    SliderInteract sliderInteract;
 
     public MainActivityPresenter(IMainActivityContract.View mView) {
         this.mView = mView;
         this.mainInteract = new MainInteract(this);
+        this.sliderInteract = new SliderInteract(this);
     }
 
     @Override
@@ -24,17 +27,25 @@ public class MainActivityPresenter  implements IMainActivityContract.Presenter{
         this.mView.brandRecycleConfig();
         this.mView.bottomNavConfig();
         this.mView.getAllBrands();
+        this.mView.slideConfig();
     }
 
     @Override
-    public void callAllBrands() {
+    public void callAll() {
         this.mView.showDialogLoading();
         this.mainInteract.getCallAllBrands();
+        this.sliderInteract.getAllSliders();
     }
 
     @Override
     public void success(List<CarBrand> body) {
         this.mView.hideDialogLoading();
         this.mView.onGetDataSuccess(body);
+    }
+
+    @Override
+    public void successSlide(List<SliderItem> body) {
+        this.mView.hideDialogLoading();
+        this.mView.onGetDatSlider(body);
     }
 }

@@ -31,7 +31,7 @@ public class MainInteract {
             @Override
             public void onResponse(@NotNull Call<List<CarBrand>> call, @NotNull Response<List<CarBrand>> response) {
                 presenter.success(response.body());
-                Log.i("data",response.body().toString());
+
             }
 
             @Override

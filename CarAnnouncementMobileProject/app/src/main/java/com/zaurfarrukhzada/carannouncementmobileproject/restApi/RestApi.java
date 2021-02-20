@@ -6,6 +6,7 @@ import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarModel;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.SliderItem;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
 
 import java.util.List;
@@ -40,5 +41,8 @@ public interface RestApi {
 
     @GET("models/select/{brandId}")
     Call<List<CarModel>> getFindByIdModels(@Path("brandId") int id); //Find Car Models by brand id;
+
+    @GET("slide")
+    Call<List<SliderItem>> getCallSliderImage(); //Call Main Sliders
 
 }

@@ -75,7 +75,7 @@ public class BrandController {
             Map<String,Object> map = new HashMap<>();
             map.put("id",carBrand.getId());
             map.put("name",carBrand.getName());
-            map.put("logoImage", Convert.ConvertBase64(carBrand.getLogoImage()));
+            map.put("logoImage", Convert.ConvertBase64("image/logo/" + carBrand.getLogoImage()));
             newdata.add(map);
         }
         return newdata;

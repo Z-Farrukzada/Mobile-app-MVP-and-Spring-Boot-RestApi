@@ -6,6 +6,7 @@ import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarModel;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.Message;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.SliderItem;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.User;
 
 import java.util.List;
@@ -47,8 +48,12 @@ public class ManagerAll extends  BaseManager{
     public Call<List<AllCarBrand>> getCallBrands(){
         return getRestApiClient().getCallAllBrands();
     }
+
     public Call<List<CarModel>> getFindModelsWithByBrandId(int id){
         return  getRestApiClient().getFindByIdModels(id);
     }
 
+    public Call<List<SliderItem>> getCallSlider(){
+        return getRestApiClient().getCallSliderImage();
+    }
 }

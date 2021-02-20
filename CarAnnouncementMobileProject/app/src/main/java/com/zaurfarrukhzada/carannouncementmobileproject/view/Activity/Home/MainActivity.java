@@ -8,17 +8,25 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.zaurfarrukhzada.carannouncementmobileproject.R;
 import com.zaurfarrukhzada.carannouncementmobileproject.adapter.BrandAdapter;
 import com.zaurfarrukhzada.carannouncementmobileproject.adapter.RecycleViewInterface;
+import com.zaurfarrukhzada.carannouncementmobileproject.adapter.SliderAdapter;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.SliderItem;
 import com.zaurfarrukhzada.carannouncementmobileproject.utils.LoadingDialogCustom;
 import com.zaurfarrukhzada.carannouncementmobileproject.view.Activity.AllBrands.AllBrandActivity;
 import com.zaurfarrukhzada.carannouncementmobileproject.view.Activity.Models.ModelActivity;
@@ -40,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
     @BindView(R.id.main_menu_toolbar) Toolbar toolbar;
     @BindView(R.id.brands_recycle) RecyclerView recyclerView;
     @BindView(R.id.bottom_navigation_view) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.main_viewpager2_slider) ViewPager2 viewPager2;
     BrandAdapter brandAdapter;
     LinearLayoutManager linearLayoutManager;
+    Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
 
     @Override
     public void getAllBrands() {
-        this.mainActivityPresenter.callAllBrands();
+        this.mainActivityPresenter.callAll();
     }
 
     @Override
@@ -87,6 +97,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
     @Override
     public void hideDialogLoading() {
         LoadingDialogCustom.dismissDialog();
+    }
+
+    @Override
+    public void onGetDatSlider(List<SliderItem> sliderItems) {
+        viewPager2.setAdapter(new SliderAdapter(sliderItems,viewPager2));
     }
 
 
@@ -109,6 +124,20 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
     }
 
 
+    Runnable runnable = () -> viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
+
+
+    @Override
+    public void slideConfig() {
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+           @Override
+           public void onPageSelected(int position) {
+               super.onPageSelected(position);
+               handler.removeCallbacks(runnable);
+               handler.postDelayed(runnable,4000);//Slide Duration
+           }
+       });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -145,4 +174,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
         //TODO:SWITCH OR IF check item id and transition items
         return false;
     }
+
+
 }

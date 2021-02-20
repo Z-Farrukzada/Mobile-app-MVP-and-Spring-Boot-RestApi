@@ -12,9 +12,9 @@ import java.util.Base64;
 @UtilityClass
 public class Convert {
 
-    public  byte[]  ConvertBase64(String file) throws IOException {
+    public  byte[]  ConvertBase64(String path) throws IOException {
 
-        ClassPathResource imgFile = new ClassPathResource("image/logo/"+file);
+        ClassPathResource imgFile = new ClassPathResource(path);
         return StreamUtils.copyToByteArray(imgFile.getInputStream());
     }
 

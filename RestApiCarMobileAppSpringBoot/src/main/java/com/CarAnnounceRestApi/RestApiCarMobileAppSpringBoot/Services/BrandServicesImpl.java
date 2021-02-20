@@ -88,7 +88,7 @@ public class BrandServicesImpl implements BrandServices {
             Map<String, Object> map = new HashMap<>();
             map.put("id", carBrand.getId());
             map.put("name", carBrand.getName());
-            map.put("logoImage", Convert.ConvertBase64(carBrand.getLogoImage()));
+            map.put("logoImage", Convert.ConvertBase64("image/logo/" + carBrand.getLogoImage()));
             map.put("count", carBrand.getCount());
             newdata.add(map);
         }
