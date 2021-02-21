@@ -1,6 +1,7 @@
 package com.zaurfarrukhzada.carannouncementmobileproject.view.Activity.Home;
 
 
+import com.zaurfarrukhzada.carannouncementmobileproject.model.Announcement;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.SliderItem;
 
@@ -17,9 +18,13 @@ public interface IMainActivityContract {
 
         void brandRecycleConfig();
 
+        void announcementConfig();
+
         void onGetDataSuccess(List<CarBrand> carBrandList);
 
         void getAllBrands();
+
+        void CallAnnouncement();
 
         void showDialogLoading();
 
@@ -32,6 +37,8 @@ public interface IMainActivityContract {
         void bottomNavConfig();
 
         void slideConfig();
+
+        void GetDataAnnouncement(List<Announcement> body);
     }
 
     interface Presenter{

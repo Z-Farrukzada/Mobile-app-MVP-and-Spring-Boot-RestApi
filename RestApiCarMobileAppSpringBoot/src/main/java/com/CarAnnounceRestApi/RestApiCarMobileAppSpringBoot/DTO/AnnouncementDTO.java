@@ -1,14 +1,19 @@
-package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.Domain;
-import lombok.*;
+package com.CarAnnounceRestApi.RestApiCarMobileAppSpringBoot.DTO;
 
-import java.io.Serializable;
-import java.sql.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.text.DateFormat;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public  class CarAnnouncement implements Serializable {
+@Builder
+public class AnnouncementDTO {
+
     private  int id;
     private  int walk;
     private  int price;
@@ -17,7 +22,7 @@ public  class CarAnnouncement implements Serializable {
     private  String description;
     private  String transmission;
     private  String gearBox;
-    private Date carYear;
+    private DateFormat carYear;
     private  int engineCapacity ;
     private  int enginePower;
 
@@ -28,6 +33,6 @@ public  class CarAnnouncement implements Serializable {
     private  int banId;
     private  int userId;
     private  int exchangeId;
-    private  Date createdAnnouncement;
-    private  Date updatedAnnouncement;
+    private  DateFormat createdAnnouncement;
+    private  DateFormat updatedAnnouncement;
 }

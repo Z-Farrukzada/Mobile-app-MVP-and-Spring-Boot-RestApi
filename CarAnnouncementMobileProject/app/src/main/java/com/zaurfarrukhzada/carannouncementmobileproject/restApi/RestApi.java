@@ -2,6 +2,7 @@ package com.zaurfarrukhzada.carannouncementmobileproject.restApi;
 
 import com.google.gson.JsonObject;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.AllCarBrand;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.Announcement;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarModel;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.City;
@@ -44,5 +45,8 @@ public interface RestApi {
 
     @GET("slide")
     Call<List<SliderItem>> getCallSliderImage(); //Call Main Sliders
+
+    @GET("announcement")
+    Call<List<Announcement>> getCallPopCarAnnouncement();//Call Populyar Announcement
 
 }

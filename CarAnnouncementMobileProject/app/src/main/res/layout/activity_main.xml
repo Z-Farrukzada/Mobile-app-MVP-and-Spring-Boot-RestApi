@@ -9,15 +9,14 @@
     android:layout_height="match_parent">
 
 
-
-<RelativeLayout
+    <RelativeLayout
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.Activity.Home.MainActivity">
 
 
-        <androidx.appcompat.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
             android:id="@+id/main_menu_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,38 +30,48 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleMarginStart="@dimen/margin_x_small" />
 
+            <include
+                android:id="@+id/main_brands"
+                layout="@layout/brands"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_menu_toolbar"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
 
 
-         <include layout="@layout/brands"
-                  android:id="@+id/main_brands"
-                  android:layout_below="@id/main_menu_toolbar"
-                  android:layout_width="wrap_content"
-                  android:layout_alignParentStart="true"
-                  android:layout_alignParentEnd="true"
-                  android:layout_height="wrap_content"/>
+            <include
+                android:id="@+id/slider"
+                layout="@layout/slider"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_below="@id/main_brands"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
 
 
-    <include layout="@layout/slider"
-        android:id="@+id/slider"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/main_brands"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_height="200dp" />
+            <include
+                layout="@layout/car_announcement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/slider"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
 
 
-    <include
-        android:id="@+id/bottom_nav"
-        layout="@layout/bottom_navigation"
-        android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_height="@dimen/height_medium" />
+        <include
+            android:id="@+id/bottom_nav"
+            layout="@layout/bottom_navigation"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="@dimen/height_small" />
 
-</RelativeLayout>
+    </RelativeLayout>
 
-      <com.google.android.material.navigation.NavigationView
+
+    <com.google.android.material.navigation.NavigationView
           android:id="@+id/navigation_view_menu"
           android:layout_width="wrap_content"
           android:layout_height="match_parent"

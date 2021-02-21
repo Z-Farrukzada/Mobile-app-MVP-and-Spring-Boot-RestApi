@@ -22,9 +22,11 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.zaurfarrukhzada.carannouncementmobileproject.R;
+import com.zaurfarrukhzada.carannouncementmobileproject.adapter.AnnouncementPopAdapter;
 import com.zaurfarrukhzada.carannouncementmobileproject.adapter.BrandAdapter;
 import com.zaurfarrukhzada.carannouncementmobileproject.adapter.RecycleViewInterface;
 import com.zaurfarrukhzada.carannouncementmobileproject.adapter.SliderAdapter;
+import com.zaurfarrukhzada.carannouncementmobileproject.model.Announcement;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.CarBrand;
 import com.zaurfarrukhzada.carannouncementmobileproject.model.SliderItem;
 import com.zaurfarrukhzada.carannouncementmobileproject.utils.LoadingDialogCustom;
@@ -47,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
     @BindView(R.id.drawer_main) DrawerLayout drawerLayout;
     @BindView(R.id.main_menu_toolbar) Toolbar toolbar;
     @BindView(R.id.brands_recycle) RecyclerView recyclerView;
+    @BindView(R.id.car_announcement_recycle_view) RecyclerView carAnnouncementRecycle;
     @BindView(R.id.bottom_navigation_view) BottomNavigationView bottomNavigationView;
     @BindView(R.id.main_viewpager2_slider) ViewPager2 viewPager2;
-    BrandAdapter brandAdapter;
     LinearLayoutManager linearLayoutManager;
     Handler handler = new Handler(Looper.getMainLooper());
 
@@ -73,20 +75,34 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
 
     @Override
     public void brandRecycleConfig() {
+        recyclerView.setLayoutManager(linearConfig());
+
+    }
+
+    @Override
+    public void announcementConfig() {
+        carAnnouncementRecycle.setLayoutManager(linearConfig());
+    }
+
+    public LinearLayoutManager linearConfig(){
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        return linearLayoutManager;
     }
 
     @Override
     public void onGetDataSuccess(List<CarBrand> carBrandList) {
-        brandAdapter = new BrandAdapter(carBrandList,MainActivity.this,this);
-        recyclerView.setAdapter(brandAdapter);
+        recyclerView.setAdapter(new BrandAdapter(carBrandList,MainActivity.this,this));
     }
 
     @Override
     public void getAllBrands() {
         this.mainActivityPresenter.callAll();
+    }
+
+    @Override
+    public void CallAnnouncement() {
+        this.mainActivityPresenter.callAnnouncementPresenter();
     }
 
     @Override
@@ -103,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
     public void onGetDatSlider(List<SliderItem> sliderItems) {
         viewPager2.setAdapter(new SliderAdapter(sliderItems,viewPager2));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,9 +138,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
-
     Runnable runnable = () -> viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
-
 
     @Override
     public void slideConfig() {
@@ -137,6 +150,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
                handler.postDelayed(runnable,4000);//Slide Duration
            }
        });
+    }
+
+    @Override
+    public void GetDataAnnouncement(List<Announcement> body) {
+        carAnnouncementRecycle.setAdapter(new AnnouncementPopAdapter(body));
     }
 
     @Override

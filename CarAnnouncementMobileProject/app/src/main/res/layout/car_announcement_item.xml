@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:padding="@dimen/padding_medium"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/car_announcement_image"
+        android:layout_width="@dimen/width_medium"
+        android:src="@drawable/happy"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="@dimen/height_large"
+        tools:ignore="ContentDescription" />
+
+
+     <TextView
+         android:id="@+id/car_announcement_brand"
+         android:layout_width="wrap_content"
+         android:layout_alignParentStart="true"
+         android:textColor="@color/blueDark"
+         android:fontFamily="@font/nerk"
+         android:padding="@dimen/padding_medium"
+         android:text="Mercedes"
+         android:textSize="@dimen/text_x_small"
+         android:layout_below="@id/car_announcement_image"
+         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/car_announcement_model"
+        android:layout_width="wrap_content"
+       android:layout_toRightOf="@id/car_announcement_brand"
+        android:text="C200"
+        android:padding="@dimen/padding_medium"
+        android:textColor="@color/blueDark"
+        android:fontFamily="@font/nerk"
+        android:textSize="@dimen/text_x_small"
+        android:layout_below="@id/car_announcement_image"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/car_announcement_walk"
+        android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="28000 km"
+        android:padding="@dimen/padding_medium"
+        android:textColor="@color/blueDark"
+        android:fontFamily="@font/nerk"
+        android:textSize="@dimen/text_x_small"
+        android:layout_below="@id/car_announcement_brand"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/car_announcement_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/car_announcement_brand"
+        android:padding="@dimen/padding_medium"
+        android:layout_toRightOf="@id/car_announcement_walk"
+        android:fontFamily="@font/nerk"
+        android:text="2020/20/10"
+        android:textColor="@color/blueDark"
+        android:textSize="@dimen/text_x_small" />
+
+    <TextView
+        android:id="@+id/car_announcement_price"
+        android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="80000"
+        android:padding="@dimen/padding_medium"
+        android:textColor="@color/blueDark"
+        android:fontFamily="@font/nerk"
+        android:textSize="@dimen/text_x_small"
+        android:layout_below="@id/car_announcement_walk"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/car_announcement_exchange"
+        android:layout_width="wrap_content"
+        android:text="AZN"
+        android:padding="@dimen/padding_medium"
+        android:textColor="@color/blueDark"
+        android:fontFamily="@font/nerk"
+        android:textSize="@dimen/text_x_small"
+        android:layout_below="@id/car_announcement_year"
+        android:layout_toRightOf="@id/car_announcement_price"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
