@@ -21,6 +21,7 @@
     <dimen name="text_medium">30sp</dimen>
     <dimen name="text_small">25sp</dimen>
     <dimen name="text_x_small">15sp</dimen>
+    <dimen name="text_xx_small">10sp</dimen>
 
  <!-- Width sizes-->
     <dimen name="width_x_large">200sp</dimen>

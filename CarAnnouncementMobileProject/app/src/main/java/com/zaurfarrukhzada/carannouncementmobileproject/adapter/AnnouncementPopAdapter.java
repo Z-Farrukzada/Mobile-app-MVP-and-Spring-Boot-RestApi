@@ -36,15 +36,16 @@ public class AnnouncementPopAdapter extends RecyclerView.Adapter<AnnouncementPop
 
     @Override
     public void onBindViewHolder(@NonNull AnnouncementPopAdapter.ViewHolder holder, int position) {
+
+           String exChange = announcementList.get(position).getExchangeName();
+           String modelName = announcementList.get(position).getModelName();
+           int Price = announcementList.get(position).getPrice();
            String imageView = announcementList.get(position).getImageUrl();
            String brandName = announcementList.get(position).getBrandName();
-           String Year = announcementList.get(position).getCarYear();
            int Walk = announcementList.get(position).getWalk();
-           int Price = announcementList.get(position).getPrice();
-           String modelName = announcementList.get(position).getModelName();
-           String exChange = announcementList.get(position).getExchangeName();
+           String Year = announcementList.get(position).getCarYear();
 
-           holder.setData(exChange,brandName,modelName,Price,Walk,Year);
+           holder.setData(exChange,brandName,modelName,Walk,Price,Year);
            holder.setImage(imageView);
     }
 
@@ -74,8 +75,8 @@ public class AnnouncementPopAdapter extends RecyclerView.Adapter<AnnouncementPop
             model.setText(modelName);
             brand.setText(brandName);
             price.setText(Integer.toString(Price));
-            walk.setText(Integer.toString(Walk));
-            year.setText(Year);
+            walk.setText("Yuruyus " + Walk + "km");
+            year.setText("il " + Year);
          }
          public void setImage(String imageUrl){
             if(imageUrl!=null){

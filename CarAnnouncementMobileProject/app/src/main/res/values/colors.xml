@@ -9,4 +9,5 @@
     <color name="blueDark">#5321e2</color>
     <color name="success">#28a745</color>
     <color name="error">#DC3545</color>
+    <color name="red">#EC1818</color>
 </resources>

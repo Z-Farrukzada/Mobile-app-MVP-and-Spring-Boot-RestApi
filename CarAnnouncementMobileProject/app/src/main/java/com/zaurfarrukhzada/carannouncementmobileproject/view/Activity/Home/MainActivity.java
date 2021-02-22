@@ -100,10 +100,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityCont
         this.mainActivityPresenter.callAll();
     }
 
-    @Override
-    public void CallAnnouncement() {
-        this.mainActivityPresenter.callAnnouncementPresenter();
-    }
 
     @Override
     public void showDialogLoading() {

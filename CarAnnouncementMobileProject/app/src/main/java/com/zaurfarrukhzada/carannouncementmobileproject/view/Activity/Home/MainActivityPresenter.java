@@ -40,11 +40,6 @@ public class MainActivityPresenter  implements IMainActivityContract.Presenter{
         this.mView.showDialogLoading();
         this.mainInteract.getCallAllBrands();
         this.sliderInteract.getAllSliders();
-
-    }
-
-    public void callAnnouncementPresenter() {
-        this.mView.showDialogLoading();
         this.announcementInteract.getCallPopAnnouncement();
     }
 
@@ -61,6 +56,7 @@ public class MainActivityPresenter  implements IMainActivityContract.Presenter{
     }
 
     public void successAnnouncement(List<Announcement> body) {
+        this.mView.hideDialogLoading();
         this.mView.GetDataAnnouncement(body);
     }
 

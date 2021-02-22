@@ -24,8 +24,6 @@ public interface IMainActivityContract {
 
         void getAllBrands();
 
-        void CallAnnouncement();
-
         void showDialogLoading();
 
         void hideDialogLoading();
@@ -50,6 +48,8 @@ public interface IMainActivityContract {
         void success(List<CarBrand> body);
 
         void successSlide(List<SliderItem> body);
+
+
     }
 
 }

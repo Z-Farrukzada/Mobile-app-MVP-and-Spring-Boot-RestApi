@@ -30,34 +30,43 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleMarginStart="@dimen/margin_x_small" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@id/main_menu_toolbar"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/bottom_nav"
+            android:layout_height="match_parent"
+            tools:ignore="ScrollViewCount">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
             <include
                 android:id="@+id/main_brands"
                 layout="@layout/brands"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/main_menu_toolbar"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_height="wrap_content" />
 
 
             <include
                 android:id="@+id/slider"
                 layout="@layout/slider"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_below="@id/main_brands"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
 
 
             <include
                 layout="@layout/car_announcement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/slider"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+        </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
         <include
             android:id="@+id/bottom_nav"
@@ -67,6 +76,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_height="@dimen/height_small" />
+
 
     </RelativeLayout>
 
